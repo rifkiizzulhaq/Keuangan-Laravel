@@ -10,6 +10,7 @@ class Unit extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
+        'admin_id',
         'bidang'
         // 'admin_id',
         // 'pemimpin_id',
@@ -19,10 +20,14 @@ class Unit extends Model
     {
         return $this->belongsTo(User::class);
     }
-    // public function admin()
-    // {
-    //     return $this->belongsTo(Admin::class);
-    // }
+    public function usulan_kegiatans()
+    {
+        return $this->hasMany(UsulanKegiatan::class);
+    }
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
     // public function pemimpin()
     // {
     //     return $this->belongsTo(Pemimpin::class);

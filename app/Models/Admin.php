@@ -10,7 +10,7 @@ class Admin extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'pemimpin_id',
+        'unit_id',
         'nip',
         'nidn',
     ];
@@ -18,6 +18,13 @@ class Admin extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function unit(){
+        return $this->belongsTo(Unit::class);
+    }
+    public function usulan_kegiatans()
+    {
+        return $this->hasMany(UsulanKegiatan::class);
     }
     // public function pemimpin()
     // {

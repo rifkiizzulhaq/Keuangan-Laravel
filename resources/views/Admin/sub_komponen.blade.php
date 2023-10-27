@@ -12,17 +12,17 @@
                             class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
                             <div>
                                 <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
-                                    Table Program
+                                    Table Sub Komponen
                                 </h2>
                                 <p class="text-sm text-gray-600 dark:text-gray-400">
-                                    Data Table Program
+                                    Data Table Sub Komponen
                                 </p>
                             </div>
 
                             <div>
                                 <div class="inline-flex gap-x-2">
                                     <a class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-                                        href="{{ route('admin.program_create') }}">
+                                        href="{{ route('admin.sub_komponen_create') }}">
                                         <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16"
                                             height="16" viewBox="0 0 16 16" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +51,7 @@
                                     <th scope="col" class="px-6 py-3 text-left">
                                         <span
                                             class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                            PROGRAM
+                                            Sub Komponen
                                         </span>
                                     </th>
 
@@ -65,7 +65,7 @@
                             </thead>
 
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                                @foreach ($program as $item)
+                                @foreach ($SubKomponen as $item)
                                 <tr>
                                     <td class="h-20 w-auto whitespace-nowrap">
                                         <div class="px-6 py-2">
@@ -74,14 +74,14 @@
                                     </td>
                                     <td class="h-20 w-auto whitespace-nowrap">
                                         <div class="px-6 py-2">
-                                            <span class="text-md text-gray-500">{{ $item->program ?? '' }}</span>
+                                            <span class="text-md text-gray-500">{{ $item->sub_komponen ?? '' }}</span>
                                         </div>
                                     </td>
                                     <td class="h-20 w-auto whitespace-nowrap flex items-center">
-                                        <a href="{{ route('admin.program_edit', ['id' => $item->id]) }}" class="mx-2 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border-2 border-yellow-200 font-semibold text-yellow-500 hover:text-white hover:bg-yellow-500 hover:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                        <a href="{{ route('admin.sub_komponen_edit', ['id' => $item->id]) }}" class="mx-2 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border-2 border-yellow-200 font-semibold text-yellow-500 hover:text-white hover:bg-yellow-500 hover:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                             UPDATE
                                         </a>
-                                        <form method="POST" action="{{ route('admin.program_delete',['id' => $item->id]) }}">
+                                        <form method="POST" action="{{ route('admin.sub_komponen_delete',['id' => $item->id]) }}">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border-2 border-red-200 font-semibold text-red-500 hover:text-white hover:bg-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-200 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">

@@ -55,15 +55,72 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
 
     Route::middleware(['CheckUserRole:Admin'])->group(function () {
+        // Route::get('/usulan-unit', [AdminController::class, 'usulan_unit'])->name('admin.usulan_unit');
+        Route::get('/usulan', [AdminController::class, 'usulan'])->name('admin.usulan');
+        Route::get('/unit-mengusulkan',[AdminController::class, 'unit_mengusulkan'])->name('admin.unit_mengusulkan');
+
         Route::get('/admin-program', [AdminController::class, 'program'])->name('admin.program');
+        Route::get('/program-create', [AdminController::class, 'program_create'])->name('admin.program_create');
+        Route::post('/program-store', [AdminController::class, 'program_store'])->name('admin.program_store');
+        Route::get('/program-edit/{id}', [AdminController::class, 'program_edit'])->name('admin.program_edit');
+        Route::put('/update-program/{id}', [AdminController::class, 'update_program'])->name('admin.update_program');
+        Route::delete('/destroy-program/{id}', [AdminController::class, 'program_delete'])->name('admin.program_delete');
+
+        Route::get('/admin-kegiatan',[AdminController::class, 'kegiatan'])->name('admin.kegiatan');
+        Route::get('/kegiatan-create',[AdminController::class, 'kegiatan_create'])->name('admin.kegiatan_create');
+        Route::post('/kegiatan-store',[AdminController::class, 'kegiatan_store'])->name('admin.kegiatan_store');
+        Route::get('/kegiatan-edit/{id}',[AdminController::class, 'kegiatan_edit'])->name('admin.kegiatan_edit');
+        Route::put('/update-kegiatan/{id}',[AdminController::class, 'update_kegiatan'])->name('admin.update_kegiatan');
+        Route::delete('/destroy-kegiatan/{id}',[AdminController::class, 'kegiatan_delete'])->name('admin.kegiatan_delete');
+
+        Route::get('/admin-kro',[AdminController::class, 'kro'])->name('admin.kro');
+        Route::get('/kro-create',[AdminController::class, 'kro_create'])->name('admin.kro_create');
+        Route::post('/kro-store',[AdminController::class, 'kro_store'])->name('admin.kro_store');
+        Route::get('/kro-edit/{id}',[AdminController::class, 'kro_edit'])->name('admin.kro_edit');
+        Route::put('/update-kro/{id}',[AdminController::class, 'update_kro'])->name('admin.update_kro');
+        Route::delete('/destroy-kro/{id}',[AdminController::class, 'kro_delete'])->name('admin.kro_delete');
+
+        Route::get('/admin-ro',[AdminController::class, 'ro'])->name('admin.ro');
+        Route::get('/ro-create',[AdminController::class, 'ro_create'])->name('admin.ro_create');
+        Route::post('/ro-store',[AdminController::class, 'ro_store'])->name('admin.ro_store');
+        Route::get('/ro-edit/{id}',[AdminController::class, 'ro_edit'])->name('admin.ro_edit');
+        Route::put('/update-ro/{id}',[AdminController::class, 'update_ro'])->name('admin.update_ro');
+        Route::delete('/destroy-ro/{id}',[AdminController::class, 'ro_delete'])->name('admin.ro_delete');
+
+        Route::get('/admin-komponen',[AdminController::class, 'komponen'])->name('admin.komponen');
+        Route::get('/komponen-create',[AdminController::class, 'komponen_create'])->name('admin.komponen_create');
+        Route::post('/komponen-store',[AdminController::class, 'komponen_store'])->name('admin.komponen_store');
+        Route::get('/komponen-edit/{id}',[AdminController::class, 'komponen_edit'])->name('admin.komponen_edit');
+        Route::put('/update-komponen/{id}',[AdminController::class, 'update_komponen'])->name('admin.update_komponen');
+        Route::delete('/destroy-komponen/{id}',[AdminController::class, 'komponen_delete'])->name('admin.komponen_delete');
+
+        Route::get('/sub-komponen',[AdminController::class, 'sub_komponen'])->name('admin.sub_komponen');
+        Route::get('/sub-komponen-create',[AdminController::class, 'sub_komponen_create'])->name('admin.sub_komponen_create');
+        Route::post('/sub-komponen-store',[AdminController::class, 'sub_komponen_store'])->name('admin.sub_komponen_store');
+        Route::get('/sub-komponen-edit/{id}',[AdminController::class, 'sub_komponen_edit'])->name('admin.sub_komponen_edit');
+        Route::put('/update-sub-komponen/{id}',[AdminController::class, 'update_sub_komponen'])->name('admin.update_sub_komponen');
+        Route::delete('/destroy-sub-komponen/{id}',[AdminController::class, 'sub_komponen_delete'])->name('admin.sub_komponen_delete');
+
+        Route::get('/sub-komponen-detail',[AdminController::class, 'sub_komponen_detail'])->name('admin.sub_komponen_detail');
+        Route::get('/sub-komponen-detail-create',[AdminController::class, 'sub_komponen_detail_create'])->name('admin.sub_komponen_detail_create');
+        Route::post('/sub-komponen-detail-store',[AdminController::class, 'sub_komponen_detail_store'])->name('admin.sub_komponen_detail_store');
+        Route::get('/sub-komponen-detail-edit/{id}',[AdminController::class, 'sub_komponen_detail_edit'])->name('admin.sub_komponen_detail_edit');
+        Route::put('/update-sub-komponen-detail/{id}',[AdminController::class, 'update_sub_komponen_detail'])->name('admin.update_sub_komponen_detail');
+        Route::delete('/destroy-sub-komponen-detail/{id}',[AdminController::class, 'sub_komponen_detail_delete'])->name('admin.sub_komponen_detail_delete');
     });
 
     Route::middleware(['CheckUserRole:Pemimpin'])->group(function () {
         Route::get('/dashboard', [PemimpinController::class, 'index'])->name('dashboard');
+
     });
 
     Route::middleware(['CheckUserRole:Unit'])->group(function () {
         Route::get('/unit-kegiatan', [UnitController::class, 'index'])->name('unit.kegiatan');
+        Route::get('/unit-anggaran', [UnitController::class, 'anggaran'])->name('unit.anggaran');
+        Route::post('/store-anggaran', [UnitController::class, 'store_anggaran'])->name('unit.store_anggaran');
+        Route::get('/edit-anggaran/{id}', [UnitController::class, 'edit_anggaran'])->name('unit.edit_anggaran');
+        Route::put('/update-anggaran/{id}', [UnitController::class, 'update_anggaran'])->name('unit.update_anggaran');
+        Route::delete('/destroy-anggaran/{id}', [UnitController::class, 'destroy_anggaran'])->name('unit.destroy_anggaran');
     });
 });
 
