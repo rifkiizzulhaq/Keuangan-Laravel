@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/unit-mengusulkan/{id}',[AdminController::class, 'unit_mengusulkan'])->name('admin.unit_mengusulkan');
         Route::post('/admin-mengusulkan-kode/{id}',[AdminController::class, 'buat_kode_usulan'])->name('admin.buat_kode_usulan');
         Route::get('/admin-modal/{id}',[AdminController::class, 'modal'])->name('admin.modal');
+        Route::get('/admin-lihat-detail/{id}',[AdminController::class, 'lihat_detail'])->name('admin.lihat_detail');
 
         Route::get('/admin-program', [AdminController::class, 'program'])->name('admin.program');
         Route::get('/program-create', [AdminController::class, 'program_create'])->name('admin.program_create');
@@ -123,6 +124,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/edit-anggaran/{id}', [UnitController::class, 'edit_anggaran'])->name('unit.edit_anggaran');
         Route::put('/update-anggaran/{id}', [UnitController::class, 'update_anggaran'])->name('unit.update_anggaran');
         Route::delete('/destroy-anggaran/{id}', [UnitController::class, 'destroy_anggaran'])->name('unit.destroy_anggaran');
+
+        Route::get('/unit-rpd', [UnitController::class, 'rpd'])->name('unit.rpd');
     });
 });
 

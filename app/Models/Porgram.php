@@ -11,9 +11,15 @@ class Porgram extends Model
     protected $fillable = [
         // 'admin_id',
         // 'usulan_kegiatans_id',
+        'kegiatan_siperada_id', // 'kegiatan_siperada_id
         'kode',
         'program',
     ];
+
+    public function kegiatan_siperada()
+    {
+        return $this->belongsTo(KegiatanSiperada::class);
+    }
 
     // public function admin()
     // {

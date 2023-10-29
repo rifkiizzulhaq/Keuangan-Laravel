@@ -14,7 +14,7 @@ class SubKomponenDetailSeeder extends Seeder
     public function run(): void
     {
         SubKomponenDetail::create([
-            'kode' =>40,
+            'kode' => 40,
             'kegiatan_siperada_id' => 1,
             'sub_komponen_detail' => 'Pengadaan Tanah',
         ]);

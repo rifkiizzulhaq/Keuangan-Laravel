@@ -11,6 +11,7 @@ class kro extends Model
     protected $fillable = [
         // 'admin_id',
         // 'usulan_kegiatans_id',
+        'kegiatan_siperada_id', // 'kegiatan_siperada_id
         'kode',
         'kro',
     ];

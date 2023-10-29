@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Kegiatan;
 use App\Models\KegiatanSiperada;
 use App\Models\Komponen;
@@ -38,6 +39,7 @@ class AdminController extends Controller
 
         $listTahunGrouped = UsulanKegiatan::selectRaw("YEAR(tahun_anggaran) as tahun")
             ->groupBy('tahun')
+            ->where('unit_id', $unit->id)
             ->get();
             if($tahun){
                 $usulan_kegiatan = UsulanKegiatan::where('unit_id', $unit->id)
@@ -46,6 +48,7 @@ class AdminController extends Controller
             }else{
                 $usulan_kegiatan = UsulanKegiatan::where('unit_id', $unit->id)->orderBy('tahun_anggaran','desc')->get();
             }
+            // dd($usulan_kegiatan);
             // dd($listTahunGrouped);
             // dd($usulan_kegiatan);
             $kegiataSiperada = KegiatanSiperada::with('program', 'kegiatan', 'kro', 'ro', 'komponen', 'subKomponen', 'subKomponenDetail')->first();
@@ -118,6 +121,105 @@ class AdminController extends Controller
         return view('admin.modal', ['kegiatan_siperada' => $kegiataSiperada, 'usulan_kegiatan' => $usulan_kegiatan]);
     }
 
+    public function lihat_detail($id){
+        $usulan_kegiatan = UsulanKegiatan::find($id);
+        if(!$usulan_kegiatan){
+            return redirect()->route('admin.usulan');
+        }
+        $kodeUsulan = $usulan_kegiatan->kode;
+        $arrayKodeUsulan = explode('.', $kodeUsulan);
+        // dd($arrayKodeUsulan);
+        $program = Porgram::all();
+        $kodeprogram = "";
+
+        $kegiatan = Kegiatan::all();
+        $kodekegiatan = "";
+
+        $kro = kro::all();
+        $kodekro = "";
+
+        $ro = ro::all();
+        $koderro = "";
+
+        $komponen = Komponen::all();
+        $kodekomponen = "";
+
+        $subKomponen = SubKomponen::all();
+        $kodesubKomponen = "";
+
+        $subKomponenDetail = SubKomponenDetail::all();
+        $kodesubKomponenDetail = "";
+
+        foreach($program as $p){
+            foreach($arrayKodeUsulan as $kode){
+                if($p->kode == $kode){
+                    $kodeprogram = $p->kode;
+                    // dd($p);
+                }
+            }
+        }
+        foreach($kegiatan as $k){
+            foreach($arrayKodeUsulan as $kode){
+                if($k->kode == $kode){
+                    $kodekegiatan = $k->kode;
+                }
+            }
+        }
+        foreach($kro as $k){
+            foreach($arrayKodeUsulan as $kode){
+                if($k->kode == $kode){
+                    $kodekro = $k->kode;
+                }
+            }
+        }
+        foreach($ro as $r){
+            foreach($arrayKodeUsulan as $kode){
+                if($r->kode == $kode){
+                    $koderro = $r->kode;
+                }
+            }
+        }
+        foreach($komponen as $k){
+            foreach($arrayKodeUsulan as $kode){
+                if($k->kode == $kode){
+                    $kodekomponen = $k->kode;
+                }
+            }
+        }
+        foreach($subKomponen as $s){
+            foreach($arrayKodeUsulan as $kode){
+                if($s->kode == $kode){
+                    $kodesubKomponen = $s->kode;
+                }
+            }
+        }
+        foreach($subKomponenDetail as $s){
+            foreach($arrayKodeUsulan as $kode){
+                if($s->kode == $kode){
+                    $kodesubKomponenDetail = $s->kode;
+                }
+            }
+        }
+        // dd($kodekegiatan_id);
+
+
+        // dd($kodeprogram_id);
+
+        $kegiataSiperada = KegiatanSiperada::with(['program', 'kegiatan', 'kro', 'ro', 'komponen', 'subKomponen', 'subKomponenDetail'])->first();
+        // dd($kegiataSiperada);
+        return view('admin.lihat_detail', [
+            'kegiatan_siperada' => $kegiataSiperada,
+            'usulan_kegiatan' => $usulan_kegiatan,
+            'kodeprogram' => $kodeprogram,
+            'kegiatan' => $kodekegiatan,
+            'kro' => $kodekro,
+            'ro' => $koderro,
+            'komponen' => $kodekomponen,
+            'subKomponen' => $kodesubKomponen,
+            'subKomponenDetail' => $kodesubKomponenDetail,
+        ]);
+    }
+
     // program
     public function program()
     {
@@ -136,6 +238,8 @@ class AdminController extends Controller
         ]);
 
         Porgram::create([
+            'kegiatan_siperada_id' => 1,
+
             'kode' => $data['kode'],
             'program' => $data['program'],
         ]);
@@ -187,6 +291,7 @@ class AdminController extends Controller
         ]);
 
         Kegiatan::create([
+            'kegiatan_siperada_id' => 1,
             'kode' => $data['kode'],
             'kegiatan' => $data['kegiatan'],
         ]);
@@ -237,6 +342,7 @@ class AdminController extends Controller
         ]);
 
         kro::create([
+            'kegiatan_siperada_id' => 1,
             'kode' => $data['kode'],
             'kro' => $data['kro'],
         ]);
@@ -288,6 +394,7 @@ class AdminController extends Controller
         ]);
 
         ro::create([
+            'kegiatan_siperada_id' => 1,
             'kode' => $data['kode'],
             'ro' => $data['ro'],
         ]);
@@ -339,6 +446,7 @@ class AdminController extends Controller
         ]);
 
         Komponen::create([
+            'kegiatan_siperada_id' => 1,
             'kode' => $data['kode'],
             'komponen' => $data['komponen'],
         ]);
@@ -390,6 +498,7 @@ class AdminController extends Controller
         ]);
 
         SubKomponen::create([
+            'kegiatan_siperada_id' => 1,
             'kode' => $data['kode'],
             'sub_komponen' => $data['sub_komponen'],
         ]);
@@ -440,6 +549,7 @@ class AdminController extends Controller
         ]);
 
         SubKomponenDetail::create([
+            'kegiatan_siperada_id' => 1,
             'kode' => $data['kode'],
             'sub_komponen_detail' => $data['sub_komponen_detail'],
         ]);
@@ -459,6 +569,7 @@ class AdminController extends Controller
         ]);
 
         SubKomponenDetail::where('id', $id)->update([
+            'kegiatan_siperada_id' => 1,
             'kode' => $data['kode'],
             'sub_komponen_detail' => $data['sub_komponen_detail'],
         ]);

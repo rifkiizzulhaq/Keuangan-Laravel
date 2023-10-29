@@ -120,6 +120,57 @@
                                 </tr>
                             </thead>
 
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                <thead class="bg-gray-50 divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left border-l border-gray-200 dark:border-gray-700">
+                                            <span
+                                                class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                                Uraian
+                                            </span>
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 text-left">
+                                            <span
+                                                class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                                Volume
+                                            </span>
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 text-left">
+                                            <span
+                                                class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                                Satuan
+                                            </span>
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 text-left">
+                                            <span
+                                                class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                                Harga Satuan
+                                            </span>
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 text-left">
+                                            <span
+                                                class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                                Jumlah
+                                            </span>
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 text-left">
+                                            <span
+                                                class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                                Action
+                                            </span>
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                
+                            </table>
+
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                                 @foreach ($usulan as $item)
                                 <tr>

@@ -105,4 +105,8 @@ class UnitController extends Controller
             return redirect()->route('unit.kegiatan');
         }
     }
+
+    public function rpd() {
+        return view('unit.rencana_penarikan_dana');
+    }
 }

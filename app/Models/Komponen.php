@@ -11,9 +11,11 @@ class Komponen extends Model
     protected $fillable = [
         // 'admin_id',
         // 'usulan_kegiatan_id',
+        'kegiatan_siperada_id', // 'kegiatan_siperada_id
         'kode',
         'komponen',
     ];
+
 
     // public function admin()
     // {

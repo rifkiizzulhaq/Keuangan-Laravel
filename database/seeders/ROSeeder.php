@@ -14,12 +14,12 @@ class ROSeeder extends Seeder
     public function run(): void
     {
         ro::create([
-            'kode' => 1,
+            'kode' => 100,
             'kegiatan_siperada_id' => 1,
             'ro' => 'Dukungan Oprasional PTN',
         ]);
         ro::create([
-            'kode' => 2,
+            'kode' => 200,
             'kegiatan_siperada_id' => 1,
             'ro' => 'Layanan Pendidikan',
         ]);

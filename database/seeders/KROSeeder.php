@@ -14,12 +14,12 @@ class KROSeeder extends Seeder
     public function run(): void
     {
         kro::create([
-            'kode' => 1,
+            'kode' => 180,
             'kegiatan_siperada_id' => 1,
             'kro' => 'Bantuan Lembaga [Base Line]',
         ]);
         kro::create([
-            'kode' => 2,
+            'kode' => 220,
             'kegiatan_siperada_id' => 1,
             'kro' => 'Pendidikan Tinggi [Base Line]',
         ]);

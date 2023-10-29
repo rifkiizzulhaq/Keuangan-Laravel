@@ -76,7 +76,7 @@
                     {{-- <p>{{ $usulan }}</p> --}}
                     <!-- Table -->
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead class="bg-gray-50 divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                        {{-- <thead class="bg-gray-50 divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-left border-l border-gray-200 dark:border-gray-700">
@@ -130,10 +130,58 @@
                                     </span>
                                 </th>
 
+
+                            </tr>
+                        </thead> --}}
+                        <thead class="bg-gray-50 divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left border-l border-gray-200 dark:border-gray-700">
+                                    <span
+                                        class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                        Tambahkan Tag
+                                    </span>
+                                </th>
+
+                                <th scope="col" class=" py-3 text-left">
+                                    <span
+                                        class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                        Kode
+                                    </span>
+                                </th>
+
                                 <th scope="col" class="px-6 py-3 text-left">
                                     <span
                                         class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                        ACTION
+                                        Rincian
+                                    </span>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left">
+                                    <span
+                                        class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                        Volume
+                                    </span>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left">
+                                    <span
+                                        class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                        Satuan
+                                    </span>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left">
+                                    <span
+                                        class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                        Satuan Harga
+                                    </span>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left">
+                                    <span
+                                        class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                        jumlah
                                     </span>
                                 </th>
                             </tr>
@@ -141,21 +189,93 @@
 
                         <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                             @foreach ($usulan as $item)
+                                <tr class="bg-white  dark:bg-slate-900 dark:hover:bg-slate-800">
+                                    <td class="h-px w-72 ">
+                                        <div class="flex items-center block h-full p-6">
+
+                                            <div class="text-center">
+                                                <a href="{{ route('admin.modal', ['id' => $item->id]) }}"
+                                                    class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                                                    data-hs-overlay="#hs-bg-gray-on-hover-cards">
+                                                    Pilih Tag
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                    <td class="h-px  ">
+                                        <div class="flex items-center">
+                                            {{-- <span class=" text-sm text-gray-500">{{ $item->rincian ?? '' }}</span> --}}
+                                            <span class="block text-sm text-gray-500">{{ $item->kode ?? 'Tidak Tersedia' }}</span>
+                                            <div class="mx-3">
+                                                @if ($item->kode)
+                                                    <a href="{{ route('admin.lihat_detail',['id' => $item->id]) }}" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                        Lihat
+                                                    </a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="h-px  w-1/6">
+                                        <div class="block h-full p-6">
+                                            {{-- <p>asdadadad</p> --}}
+                                            <span class=" text-sm text-gray-500">{{ $item->rincian ?? '' }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="h-px w-[15%]">
+                                        <div class="block h-full p-6">
+                                            {{-- <p>asdadadad</p> --}}
+                                            <span class=" text-sm text-gray-500">{{ $item->volume ?? '' }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="h-px w-1/6">
+                                        <div class="block h-full p-6">
+                                            <span class="block text-sm text-gray-500">{{ $item->satuan ?? '' }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="h-px w-72 ">
+                                        <div class="block h-full p-6">
+                                            <span class="block text-sm text-gray-500">{{ $item->harga_satuan ?? '' }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="h-px w-[13%] ">
+                                        <div class="block h-full p-6">
+                                            <span class="block text-sm text-gray-500">
+                                                {{ $item->volume * $item->harga_satuan }}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    {{-- <td class="h-px w-72 ">
+                                        <div class="block h-full p-6">
+                                            <div class="flex">
+                                                <a href="{{ route('unit.edit_anggaran', ['id' => $item->id]) }}"
+                                                    class="mx-2 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-yellow-100 border border-transparent font-semibold text-yellow-500 hover:text-black hover:bg-yellow-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-yellow-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                    Update
+                                                </a>
+                                                <form action="{{ route('unit.destroy_anggaran', ['id' => $item->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-black hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td> --}}
+                                </tr>
+                            @endforeach
+                        </tbody>
+
+                        {{-- <tbody class="divide-y divide-gray-200 dark:divide-gray-700"> --}}
+                            {{-- @foreach ($usulan as $item)
                                 <tr>
                                     <td class="h-20 w-auto whitespace-nowrap">
                                         <div class="px-6 py-2">
-                                            {{-- <span class="text-md text-gray-500">null</span> --}}
+
                                             <div class="inline-flex gap-x-2">
-                                                {{-- <a class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-                                                    href="{{ route('admin.usulan') }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                        class="w-3 h-3">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M12 4.5v15m7.5-7.5h-15" />
-                                                    </svg>
-                                                    Tambah
-                                                </a> --}}
+
                                                 <div class="text-center">
                                                     <a href="{{ route('admin.modal', ['id' => $item->id]) }}"
                                                         class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
@@ -171,8 +291,15 @@
                                         </div>
                                     </td>
                                     <td class="h-20 w-auto whitespace-nowrap">
-                                        <div class="px-6 py-2">
-                                            <span class="text-md text-gray-500">{{ $item->kode }}</span>
+                                        <div class="flex items-center px-6 py-2">
+                                            <span class="text-md text-gray-500">{{ $item->kode ?? 'tidak tersedia' }}</span>
+                                            <div class="mx-3">
+                                                @if ($item->kode)
+                                                <button type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                    Lihat Tag
+                                                </button>
+                                            @endif
+                                            </div>
                                         </div>
                                     </td>
                                     <td class="h-20 w-auto whitespace-nowrap">
@@ -200,7 +327,7 @@
                                             <span
                                                 class="text-md text-gray-500">{{ $item->volume * $item->harga_satuan }}</span>
                                         </div>
-                                    </td>
+                                    </td> --}}
                                     {{-- <td class="h-20 w-auto whitespace-nowrap flex items-center">
                                         <a href="{{ route('admin.kegiatan_edit', ['id' => $item->id]) }}" class="mx-2 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border-2 border-yellow-200 font-semibold text-yellow-500 hover:text-white hover:bg-yellow-500 hover:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                             Tambahkan Ke Usulan
@@ -213,9 +340,9 @@
                                             </button>
                                         </form>
                                     </td> --}}
-                                </tr>
-                            @endforeach
-                        </tbody>
+                                {{-- </tr>
+                            @endforeach --}}
+                        {{-- </tbody> --}}
                     </table>
                     <!-- End Table -->
 
