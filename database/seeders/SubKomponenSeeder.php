@@ -15,6 +15,7 @@ class SubKomponenSeeder extends Seeder
     {
         SubKomponen::create([
             'kode' => 20,
+            'kegiatan_siperada_id' => 1,
             'sub_komponen' => 'Pengadaan Tanah',
             // 'komponen_id' => 1,
         ]);

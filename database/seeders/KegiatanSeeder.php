@@ -15,10 +15,12 @@ class KegiatanSeeder extends Seeder
     {
         Kegiatan::create([
             'kode' => 4466,
+            'kegiatan_siperada_id' => 1,
             'kegiatan' => 'Penyediaan dana bantuan oprasional pendidikan',
         ]);
         Kegiatan::create([
             'kode' => 4467,
+            'kegiatan_siperada_id' => 1,
             'kegiatan' => 'Peningkatan kualitas dan kapasitas perguruan Tinggi Vokasi',
         ]);
     }

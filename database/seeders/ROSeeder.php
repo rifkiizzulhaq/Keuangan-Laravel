@@ -15,10 +15,12 @@ class ROSeeder extends Seeder
     {
         ro::create([
             'kode' => 1,
+            'kegiatan_siperada_id' => 1,
             'ro' => 'Dukungan Oprasional PTN',
         ]);
         ro::create([
             'kode' => 2,
+            'kegiatan_siperada_id' => 1,
             'ro' => 'Layanan Pendidikan',
         ]);
     }

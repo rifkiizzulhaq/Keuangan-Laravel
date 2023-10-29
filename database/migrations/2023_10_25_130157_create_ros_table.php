@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             // $table->unsignedBigInteger('admin_id');
             // $table->unsignedBigInteger('usulan_kegiatans_id');
+            $table->unsignedBigInteger('kegiatan_siperada_id');
             $table->integer('kode');
             $table->string('ro');
             $table->timestamps();
 
             // $table->foreign('usulan_kegiatans_id')->references('id')->on('usulan_kegiatans');
             // $table->foreign('admin_id')->references('id')->on('admins');
+            $table->foreign('kegiatan_siperada_id')->references('id')->on('kegiatan_siperadas');
         });
     }
 

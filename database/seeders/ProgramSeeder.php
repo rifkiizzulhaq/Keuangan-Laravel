@@ -15,10 +15,12 @@ class ProgramSeeder extends Seeder
     {
         Porgram::create([
             'kode' => 1,
+            'kegiatan_siperada_id' => 1,
             'program' => 'Program Pendidikan dan Vokasi',
         ]);
         Porgram::create([
             'kode' => 2,
+            'kegiatan_siperada_id' => 1,
             'program' => 'Pembangunan Gedung Polindra',
         ]);
     }

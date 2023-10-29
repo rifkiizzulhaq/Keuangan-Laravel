@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('unit_id');
             // $table->unsignedBigInteger('admin_id');
-            $table->integer('kode')->nullable();
+            $table->string('kode')->nullable();
             $table->integer('program')->nullable();
             $table->date('tahun_anggaran');
             $table->string('rincian');

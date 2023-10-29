@@ -59,18 +59,18 @@
                             </thead>
 
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                                {{-- @foreach ($usulan as $item) --}}
+                                @foreach ($unit as $item)
                                 <tr>
                                     <td class="h-20 w-auto whitespace-nowrap">
                                         <div class="px-6 py-2">
-                                            <span class="text-md text-gray-500">UPA Perpus</span>
-                                            {{-- <span class="text-md text-gray-500">{{ $item->rincian ?? '' }}</span> --}}
+                                            {{-- <span class="text-md text-gray-500">UPA Perpus</span> --}}
+                                            <span class="text-md text-gray-500">{{ $item->bidang ?? '' }}</span>
                                         </div>
                                     </td>
                                     <td class="h-20 w-auto whitespace-nowrap">
                                         <div class="px-6 py-2">
                                             <div class="inline-flex gap-x-2">
-                                                <a href="{{ route('admin.unit_mengusulkan') }}"
+                                                <a href="{{ route('admin.unit_mengusulkan',['id' => $item->id]) }}"
                                                     class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -98,7 +98,7 @@
                                         </form>
                                     </td> --}}
                                 </tr>
-                                {{-- @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                         <!-- End Table -->

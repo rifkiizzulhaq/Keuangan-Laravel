@@ -57,7 +57,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::middleware(['CheckUserRole:Admin'])->group(function () {
         // Route::get('/usulan-unit', [AdminController::class, 'usulan_unit'])->name('admin.usulan_unit');
         Route::get('/usulan', [AdminController::class, 'usulan'])->name('admin.usulan');
-        Route::get('/unit-mengusulkan',[AdminController::class, 'unit_mengusulkan'])->name('admin.unit_mengusulkan');
+        Route::get('/unit-mengusulkan/{id}',[AdminController::class, 'unit_mengusulkan'])->name('admin.unit_mengusulkan');
+        Route::post('/admin-mengusulkan-kode/{id}',[AdminController::class, 'buat_kode_usulan'])->name('admin.buat_kode_usulan');
+        Route::get('/admin-modal/{id}',[AdminController::class, 'modal'])->name('admin.modal');
 
         Route::get('/admin-program', [AdminController::class, 'program'])->name('admin.program');
         Route::get('/program-create', [AdminController::class, 'program_create'])->name('admin.program_create');

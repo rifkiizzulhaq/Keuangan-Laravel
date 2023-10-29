@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('sub_komponens', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('kegiatan_siperada_id');
             $table->string('kode');
             $table->string('sub_komponen');
             $table->timestamps();
+
+            $table->foreign('kegiatan_siperada_id')->references('id')->on('kegiatan_siperadas');
         });
     }
 

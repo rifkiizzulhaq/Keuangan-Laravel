@@ -15,10 +15,12 @@ class KomponenSeeder extends Seeder
     {
         Komponen::create([
             'kode' => 004,
+            'kegiatan_siperada_id' => 1,
             'komponen' => 'Dukungan Oprasional PTN',
         ]);
         Komponen::create([
             'kode' => 005,
+            'kegiatan_siperada_id' => 1,
             'komponen' => 'Dukungan Oprasional Penyelenggara Pendidikan',
         ]);
     }

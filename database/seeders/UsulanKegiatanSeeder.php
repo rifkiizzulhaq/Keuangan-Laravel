@@ -13,12 +13,13 @@ class UsulanKegiatanSeeder extends Seeder
      */
     public function run(): void
     {
-        // UsulanKegiatan::create([
-        //     'tahun_anggaran' => 2023-11-11,
-        //     'rincian' => 'gak tau males',
-        //     'volume' => 20,
-        //     'satuan' => 'males',
-        //     'harga_satuan' => 200000,
-        // ]);
+        UsulanKegiatan::create([
+            'unit_id' => 1,
+            'tahun_anggaran' => '2023-11-11',
+            'rincian' => 'gak tau males',
+            'volume' => 20,
+            'satuan' => 'males',
+            'harga_satuan' => 200000,
+        ]);
     }
 }
