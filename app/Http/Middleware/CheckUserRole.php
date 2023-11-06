@@ -25,11 +25,11 @@ class CheckUserRole
         if ($user && $user->role === 'Superadmin') {
             return redirect('/account-admin')->with('success', 'You are signed in!');
         } elseif ($user && $user->role === 'Admin') {
-            return redirect('/admin-program')->with('success', 'Your are signed in!');
+            return redirect('/table-program')->with('success', 'Your are signed in!');
         } elseif ($user && $user->role === 'Pemimpin') {
             return redirect('/dashboard')->with('success', 'Your are signed in!');
         } elseif ($user && $user->role === 'Unit') {
-            return redirect('/unit-kegiatan')->with('success', 'Your are signed in!');
+            return redirect('/usulan-kegiatan')->with('success', 'Your are signed in!');
         } else {
             // Redirect ke halaman default jika peran tidak cocok atau pengguna tidak masuk
             return redirect('/')

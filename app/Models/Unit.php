@@ -20,16 +20,5 @@ class Unit extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function usulan_kegiatans()
-    {
-        return $this->hasMany(UsulanKegiatan::class);
-    }
-    public function admin()
-    {
-        return $this->belongsTo(Admin::class);
-    }
-    // public function pemimpin()
-    // {
-    //     return $this->belongsTo(Pemimpin::class);
-    // }
+    
 }

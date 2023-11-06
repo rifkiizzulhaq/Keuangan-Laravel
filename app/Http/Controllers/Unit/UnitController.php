@@ -3,110 +3,94 @@
 namespace App\Http\Controllers\Unit;
 
 use App\Http\Controllers\Controller;
-use App\Models\UsulanKegiatan;
+use App\Models\Kategori;
+use App\Models\KomponenProgram;
+use App\Models\Unit;
+use App\Models\Usulan;
+use App\Models\UsulanKomponenProgram;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 
 class UnitController extends Controller
 {
-    public function index(Request $request){
-        $unit_id = auth()->user()->unit->id;
-        $tahun = $request->input('tahun');
+    public function table_usulan_kegiatan(Request $request){
+        $tahun = $request->tahun;
+        $unit = Auth::user()->unit;
 
-        $listTahunGrouped = UsulanKegiatan::selectRaw("YEAR(tahun_anggaran) as tahun")
-            ->groupBy('tahun')
-            ->get();
 
-        if($tahun){
-            $usulan_kegiatan = UsulanKegiatan::where('unit_id', $unit_id)
-                ->whereRaw("YEAR(tahun_anggaran) = ?", [$tahun])
-                ->get();
+
+        $tahunenow = Date::now()->format('Y');
+
+        $usulan = Usulan::with('usulan_komponen_program')->where('unit_id', $unit->id)->get();
+
+        if(!$tahun){
+            $currentUsulan = Usulan::with('usulan_komponen_program')
+        ->where('tahun', $tahunenow)
+        ->where('unit_id', $unit->id)->first();
         }else{
-            $usulan_kegiatan = UsulanKegiatan::where('unit_id', $unit_id)->orderBy('tahun_anggaran','desc')->get();
+            $currentUsulan = Usulan::with('usulan_komponen_program')
+        ->where('tahun', $tahun)
+        ->where('unit_id', $unit->id)->first();
         }
 
-        return view('unit.kegiatan', ['usulan_kegiatan' => $usulan_kegiatan, 'listtahun' => $listTahunGrouped]);
+        // dd($currentUsulan);
 
+        $kategori = Kategori::all();
 
-    }
-
-    public function anggaran(){
-        return view('unit.perencanaan_anggaran');
-    }
-
-    public function store_anggaran(){
-
-        $data = request()->validate([
-            'tahun_anggaran' => 'required',
-            'rincian' => 'required',
-            'volume' => 'required',
-            'satuan' => 'required',
-            'harga_satuan' => 'required',
-            // 'jumlah' => 'required',
+        $komponen_program = KomponenProgram::with('kategori','parent')->get();
+        $usulan_komponent_program = UsulanKomponenProgram::with('usulan','komponen_program')->get();
+        // dd($currentUsulan);
+        return view('unit.usulan_kegiatan.table_usulan_kegiatan',[
+            'usulan_komponent_program' => $usulan_komponent_program,
+            'usulan' => $usulan,
+            'komponen_program' => $komponen_program,
+            'unit' => $unit,
+            'currentUsulan' => $currentUsulan,
+            'kategori' => $kategori,
         ]);
-        // dd($data);
+    }
 
-        $unitId = auth()->user()->unit->id;
-
-        UsulanKegiatan::create([
-            'unit_id' => $unitId,
-            'tahun_anggaran' => $data['tahun_anggaran'],
-            'rincian' => $data['rincian'],
-            'volume' => $data['volume'],
-            'satuan' => $data['satuan'],
-            'harga_satuan' => $data['harga_satuan'],
-            // 'jumlah' => $data['jumlah'],
+    public function store_tahun(Request $request){
+        // dd($request->all());
+        $request->validate([
+            'tahun' => 'required|max:4|min:4|unique:usulans,tahun',
+        ]);
+        Usulan::create([
+            'unit_id' => 1,
+            'tahun' => $request->tahun,
         ]);
 
-        return redirect()->route('unit.kegiatan');
+        return redirect()->route('table_usulan_kegiatan',['tahun' => $request->tahun])->withErrors('success','Data berhasil ditambahkan');
     }
 
+    public function store_table_program($name) {
+        $unit = Auth::user()->unit;
+        $usulan = Usulan::where('tahun', $name)
+        ->where('unit_id', $unit->id)->first();
 
-    public function edit_anggaran($id) {
-        $usulan_kegiatan = UsulanKegiatan::find($id);
-        return view('unit.edit_perencanaan_anggaran',['usulan_kegiatan' => $usulan_kegiatan]);
-    }
-
-    public function update_anggaran($id){
-        $data = request()->validate([
-            'tahun_anggaran' => 'required',
-            'rincian' => 'required',
-            'volume' => 'required',
-            'satuan' => 'required',
-            'harga_satuan' => 'required',
-            'jumlah' => 'required',
+        $usulangeprek = UsulanKomponenProgram::create([
+            'usulan_id' => $usulan->id
         ]);
 
-        $user = UsulanKegiatan::where('id', $id)->first();
+        if($usulangeprek){
+            return redirect()->route('table_usulan_kegiatan',['tahun' => $name])->withErrors('success','Data berhasil ditambahkan');
+        }
 
-        $user->update([
-            'tahun_anggaran' => $data['tahun_anggaran'],
-            'rincian' => $data['rincian'],
-            'volume' => $data['volume'],
-            'satuan' => $data['satuan'],
-            'harga_satuan' => $data['harga_satuan'],
-            'jumlah' => $data['jumlah'],
-        ]);
-
-        return redirect()->route('unit.kegiatan');
     }
 
-    public function destroy_anggaran($id) {
-        DB::beginTransaction();
+    public function store_table_kegiatan($name) {
+        $unit = Auth::user()->unit;
+        $usulan = Usulan::where('tahun', $name)
+        ->where('unit_id', $unit->id)->first();
 
-        try {
-            $user = UsulanKegiatan::find($id);
-            $user->delete();
+        $usulangeprek = UsulanKomponenProgram::create([
+            'usulan_id' => $usulan->id
+        ]);
 
-            DB::commit();
-            return redirect()->route('unit.kegiatan');
-        } catch (\Throwable $th) {
-            DB::rollback();
-            return redirect()->route('unit.kegiatan');
+        if($usulangeprek){
+            return redirect()->route('table_usulan_kegiatan',['tahun' => $name])->withErrors('success','Data berhasil ditambahkan');
         }
     }
 
-    public function rpd() {
-        return view('unit.rencana_penarikan_dana');
-    }
 }

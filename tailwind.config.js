@@ -12,6 +12,9 @@ export default {
 
     theme: {
         extend: {
+            backgroundImage:{
+                'background-login':"url('/img/background-login.svg')"
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
