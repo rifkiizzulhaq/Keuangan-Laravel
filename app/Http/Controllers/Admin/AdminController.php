@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function usulan_dari_unit(){
+        return view('Admin.usulan_dari_unit.usulan_dari_unit');
+    }
+
+    public function show_usulan(){
+        return view('Admin.usulan_dari_unit.show_usulan');
+    }
+
     public function table_program(){
         $komponen_program = KomponenProgram::with('kategori','parent')->get();
         // dd($komponen_program);
