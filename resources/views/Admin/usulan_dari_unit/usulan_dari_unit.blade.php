@@ -11,8 +11,7 @@
                         class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
                         <div>
                             <div>
-                                <label for="hs-select-label" class="block text-sm font-medium mb-2 dark:text-white">Tahun
-                                    Anggaran
+                                <label for="hs-select-label" class="block text-sm font-medium mb-2 dark:text-white">Tahun Anggaran
                                 </label>
                                 <div class="hs-dropdown relative inline-flex">
                                     <button id="hs-dropdown-slideup-animation" type="button"
@@ -116,8 +115,6 @@
                                         </div>
                                     </div>
                                 </form>
-
-
                             </div>
                         </div>
                     </div>
@@ -165,9 +162,7 @@
                                     </th>
                                 </tr>
                             </thead>
-
-                            <tbody id="row" class="divide-y divide-gray-200 dark:divide-gray-700">
-                                
+                            <tbody id="row" class="divide-y divide-gray-200 dark:divide-gray-700">                                
                                 {{-- @if ($unit->isEmpty())
                                     <tr>
                                         <td colspan="4" class="text-center">
@@ -175,8 +170,7 @@
                                         </td>
                                     </tr>
                                 @else
-                                @foreach ($unit as $unitData )
-                                    
+                                @foreach ($unit as $unitData )                                    
                                 @endforeach --}}
                                 <tr >
                                     <td class="h-px w-px whitespace-nowrap">
@@ -195,18 +189,20 @@
                                             </span>
                                         </div>
                                     </td>
-                                   
                                     <td class="h-px w-px whitespace-nowrap">
                                         <div class="px-6 py-2">
                                             <span class="text-sm text-gray-600 dark:text-gray-400">
+                                                <!-- Tambahkan kode status di sini -->
                                             </span>
                                         </div>
                                     </td>
+                                    
                                     <td class="h-px w-px whitespace-nowrap">
-                                        <div class=" py-2 flex justify-center">
+                                        <div class="py-2 flex justify-center">
                                             <button
-                                                class="py-2 px-3 mx-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-black-600 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-red-500 dark:focus:ring-offset-gray-800">
-                                                <a href="{{ route('show_usulan') }}">
+                                            class="py-2 px-4 inline-flex justify-center items-center gap-2 rounded-md border-2 border-blue-200 font-semibold text-blue-500 hover:text-white hover:bg-blue-500 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                                            onclick="showValidationMessage(this)">   
+                                            <a href="{{ route('show_usulan') }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                         class="w-6 h-6">
@@ -219,6 +215,7 @@
                                         </div>
                                     </td>
                                 </tr>
+                                
                                 {{-- @endforeach
                                 @endif
                             @endif --}}
@@ -228,7 +225,7 @@
                     <!-- End Table -->
 
                     <!-- Footer -->
-                    <div
+                    {{-- <div
                         class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
                         <div class="inline-flex items-center gap-x-2">
                             <p class="text-sm text-gray-600 dark:text-gray-400">
@@ -273,11 +270,28 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- End Footer -->
                 </div>
             </div>
         </div>
     </div>
+    {{-- <script>
+        function showValidationMessage(button) {
+            // Lakukan validasi di sini
+            if (validasiBerhasil) {
+                // Jika validasi berhasil, tampilkan pesan sukses di kolom status
+                const statusColumn = button.closest('tr').querySelector('.text-gray-600');
+                statusColumn.textContent = 'Validasi Berhasil';
+                statusColumn.style.color = 'green'; // Anda bisa menyesuaikan tampilan pesan sukses
+            } else {
+                // Jika validasi gagal, tampilkan pesan gagal di kolom status
+                const statusColumn = button.closest('tr').querySelector('.text-gray-600');
+                statusColumn.textContent = 'Validasi Gagal';
+                statusColumn.style.color = 'red'; // Anda bisa menyesuaikan tampilan pesan gagal
+            }
+        }
+    </script> --}}
+    
     <!-- End Card -->
 @endsection

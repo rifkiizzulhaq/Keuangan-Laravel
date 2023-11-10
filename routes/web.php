@@ -55,6 +55,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
 
     Route::middleware(['CheckUserRole:Admin'])->group(function () {
+        // Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard.admin');
+
         Route::get('/usulan_dari_unit', [AdminController::class, 'usulan_dari_unit'])->name('usulan_dari_unit');
         Route::get('/show_usulan', [AdminController::class, 'show_usulan'])->name('show_usulan');
 

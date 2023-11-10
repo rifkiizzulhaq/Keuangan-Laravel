@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+
+    // public function dashboard(){
+    //     return view('Admin.dashboard');
+    // }
     public function usulan_dari_unit(){
         return view('Admin.usulan_dari_unit.usulan_dari_unit');
     }

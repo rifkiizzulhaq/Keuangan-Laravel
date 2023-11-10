@@ -81,11 +81,12 @@
                                     </div>
                                 </form>
                                 <div>
-                                    <button type="submit"
-                                        class="py-3 px-4 w-full inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                                        Diterima
+                                    <button type="button" id="terimaButton" class="py-3 px-4 w-full inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                  
+                                        Terima
                                     </button>
                                 </div>
+                                
                                 <div>
                                     <button type="submit"
                                         class="py-3 px-4 w-full inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-orange-500 text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
@@ -194,7 +195,7 @@
                     <!-- End Table -->
 
                     <!-- Footer -->
-                    <div
+                    {{-- <div
                         class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
                         <div class="inline-flex items-center gap-x-2">
                             <p class="text-sm text-gray-600 dark:text-gray-400">
@@ -239,11 +240,65 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- End Footer -->
                 </div>
             </div>
         </div>
     </div>
+    {{-- <script>
+        document.getElementById('terimaButton').addEventListener('click', function () {
+            // Lakukan validasi di sini
+            // Anda dapat menggunakan JavaScript untuk memeriksa input atau mengirim permintaan AJAX ke Laravel.
+    
+            // Contoh validasi dengan JavaScript:
+            var isValid = validateForm(); // Buat fungsi validasi sendiri
+    
+            if (isValid) {
+                // Lakukan tindakan Terima
+                alert('Form valid. Terima data.'); // Gantilah ini dengan tindakan yang sesuai
+            } else {
+                alert('Form tidak valid. Mohon isi dengan benar.'); // Tampilkan pesan kesalahan atau tindakan lainnya
+            }
+        });
+    
+        function validateForm() {
+            // Buat fungsi validasi sesuai dengan kebutuhan Anda
+            // Anda dapat memeriksa input, mengirim permintaan AJAX, dan lainnya di sini
+            return true; // Gantilah ini dengan logika validasi Anda
+        }
+        function showValidationMessage(button) {
+        // Lakukan validasi di sini
+        if (validasiBerhasil) {
+            // Jika validasi berhasil, tampilkan pesan sukses di kolom status
+            const statusColumn = button.closest('tr').querySelector('.text-gray-600');
+            statusColumn.textContent = 'Validasi Berhasil';
+            statusColumn.style.color = 'green'; // Anda bisa menyesuaikan tampilan pesan sukses
+        } else {
+            // Jika validasi gagal, tampilkan pesan gagal di kolom status
+            const statusColumn = button.closest('tr').querySelector('.text-gray-600');
+            statusColumn.textContent = 'Validasi Gagal';
+            statusColumn.style.color = 'red'; // Anda bisa menyesuaikan tampilan pesan gagal
+        }
+        document.getElementById('revisiButton').addEventListener('click', function () {
+        // Perform validation for the "Revisi" action here
+        var isValid = validateRevisiForm(); // Implement your validation function
+
+        if (isValid) {
+            // Handle the "Revisi" action (e.g., submit data or show success message)
+            alert('Revisi berhasil.');
+        } else {
+            alert('Revisi tidak valid. Mohon isi dengan benar.');
+        }
+    });
+
+    function validateRevisiForm() {
+        // Implement your validation logic for the "Revisi" action
+        // You can check input fields, send AJAX requests, and more as needed
+        return true; // Replace with your validation logic
+    }
+    }
+    </script> --}}
+    
     <!-- End Card -->
 @endsection
