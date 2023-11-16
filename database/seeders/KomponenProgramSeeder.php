@@ -24,11 +24,19 @@ class KomponenProgramSeeder extends Seeder
         ]);
 
         $Kategori2 = Kategori::create([
-            'kategori' => 'kro',
+            'kategori' => 'KRO',
         ]);
 
         $Kategori3 = Kategori::create([
-            'kategori' => 'ro',
+            'kategori' => 'RO',
+        ]);
+
+        $Kategori4 = Kategori::create([
+            'kategori' => 'Komponen',
+        ]);
+
+        $Kategori5 = Kategori::create([
+            'kategori' => 'Judul Kegiatan',
         ]);
 
         KomponenProgram::create([
@@ -37,25 +45,39 @@ class KomponenProgramSeeder extends Seeder
             'uraian' => 'Program Pendidikan dan Pelatihan Vokasi',
         ]);
 
-        KomponenProgram::create([
-            'kategori_id' => $Kategori1->id,
-            'parent_id' => 1,
-            'kode' => '4466',
-            'uraian' => 'Penyediaan Dana Bantuan Operasional Perguruan Tinggi Negeri Vokasi',
-        ]);
+        // KomponenProgram::create([
+        //     'kategori_id' => $Kategori1->id,
+        //     'parent_id' => 1,
+        //     'kode' => '4466',
+        //     'uraian' => 'Penyediaan Dana Bantuan Operasional Perguruan Tinggi Negeri Vokasi',
+        // ]);
 
-        KomponenProgram::create([
-            'kategori_id' => $Kategori2->id,
-            'parent_id' => 2,
-            'kode' => '4466.BEI',
-            'uraian' => 'Bantuan Lembaga[Base Line]',
-        ]);
+        // KomponenProgram::create([
+        //     'kategori_id' => $Kategori2->id,
+        //     'parent_id' => 2,
+        //     'kode' => '4466.BEI',
+        //     'uraian' => 'Bantuan Lembaga[Base Line]',
+        // ]);
 
-        KomponenProgram::create([
-            'kategori_id' => $Kategori3->id,
-            'parent_id' => 3,
-            'kode' => '4466.BEI.001',
-            'uraian' => 'Dukungan Operasional PTN (BOPTN Vokasi)',
-        ]);
+        // KomponenProgram::create([
+        //     'kategori_id' => $Kategori3->id,
+        //     'parent_id' => 3,
+        //     'kode' => '4466.BEI.001',
+        //     'uraian' => 'Dukungan Operasional PTN (BOPTN Vokasi)',
+        // ]);
+
+        // KomponenProgram::create([
+        //     'kategori_id' => $Kategori4->id,
+        //     'parent_id' => 4,
+        //     'kode' => '004',
+        //     'uraian' => 'Dukungan Operasional PTN (BOPTN Vokasi)',
+        // ]);
+
+        // KomponenProgram::create([
+        //     'kategori_id' => $Kategori5->id,
+        //     'parent_id' => 5,
+        //     'kode' => '52115',
+        //     'uraian' => 'Dukungan Operasional PTN (BOPTN Vokasi)',
+        // ]);
     }
 }

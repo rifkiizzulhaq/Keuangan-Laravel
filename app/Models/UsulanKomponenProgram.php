@@ -11,6 +11,8 @@ class UsulanKomponenProgram extends Model
     protected $fillable = [
         'usulan_id',
         'komponen_program_id',
+        'satuan_id',
+        'akun_detail_id',
         'volume',
         'harga_satuan',
     ];
@@ -21,4 +23,14 @@ class UsulanKomponenProgram extends Model
     public function komponen_program(){
         return $this->belongsTo(KomponenProgram::class);
     }
+
+    public function satuan(){
+        return $this->belongsTo(Satuan::class);
+    }
+
+    public function akun_detail()
+    {
+        return $this->belongsTo(AkunDetail::class);
+    }
+
 }

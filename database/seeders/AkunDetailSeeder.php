@@ -14,8 +14,8 @@ class AkunDetailSeeder extends Seeder
     public function run(): void
     {
         AkunDetail::create([
-            'kode' => '52221',
-            'uraian' => 'Pembelian Licensi microsoft',
+            'kode' => '52115',
+            'uraian' => 'belanja honor oprasional satuan kerja',
         ]);
     }
 }

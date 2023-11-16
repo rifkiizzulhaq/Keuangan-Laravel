@@ -26,4 +26,8 @@ class KomponenProgram extends Model
     public function children(){
         return $this->hasMany(KomponenProgram::class, 'parent_id');
     }
+    public function satuan()
+    {
+        return $this->belongsTo(Satuan::class);
+    }
 }

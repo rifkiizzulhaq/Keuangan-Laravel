@@ -93,7 +93,16 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/usulan-kegiatan', [UnitController::class, 'table_usulan_kegiatan'])->name('table_usulan_kegiatan');
         Route::post('/store-tahun', [UnitController::class, 'store_tahun'])->name('store_tahun');
         Route::post('/store-table-usulan/{name}',[UnitController::class, 'store_table_program'])->name('store_table_usulan');
+        Route::put('/update-usulan/{id}', [UnitController::class, 'update_usulan'])->name('update_usulan');
         Route::post('/store-table-kegiatan/{name}',[UnitController::class, 'store_table_kegiatan'])->name('store_table_kegiatan');
+        Route::delete('/destroy-table-usulan/{id}', [UnitController::class, 'destroy_table_usulan'])->name('destroy_table_usulan');
+        // Route::post('/store-usulan-unit',[UnitController::class, 'store_usulan_unit'])->name('store_usulan_unit');
+
+
+        Route::get('/table-judul-kegiatan',[UnitController::class, 'table_judul_kegiatan'])->name('table_judul_kegiatan');
+        Route::post('/store-judul-kegiatan/{name}',[UnitController::class, 'store_table_judul_kegiatan'])->name('store_table_judul_kegiatan');
+        Route::put('/update-judul-kegiatan/{id}', [UnitController::class, 'update_judul_kegiatan'])->name('update_judul_kegiatan');
+        Route::delete('/destroy-table-judul-kegiatan/{id}',[UnitController::class, 'destroy_table_judul_kegiatan'])->name('destroy_table_judul_kegiatan');
     });
 });
 

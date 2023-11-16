@@ -17,7 +17,7 @@
                                 <div class="hs-dropdown relative inline-flex">
                                     <button id="hs-dropdown-slideup-animation" type="button"
                                         class="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
-                                        -- Pilih Tahun Anggaran --
+                                        {{ $currentUsulan->tahun }}
                                         <svg class="hs-dropdown-open:rotate-180 w-2.5 h-2.5 text-gray-600" width="16"
                                             height="16" viewBox="0 0 16 16" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +50,7 @@
                                     </button>
                                 </div>
 
-                                <form method="POST" action="{{ route('store_tahun') }}">
+                                <form>
                                     @csrf
                                     <div id="hs-bg-gray-on-hover-cards"
                                         class="hs-overlay hidden w-full h-full fixed top-0 left-0 z-[60] overflow-x-hidden overflow-y-auto">
@@ -133,7 +133,7 @@
                                     </div>
                                 </form>
                                 @if ($currentUsulan)
-                                    @if (count($currentUsulan->usulan_komponen_program) < 1)
+                                    @if (count($currentUsulan->usulan_komponen_program) > 1)
                                         <form id="tambah_program" method="POST"
                                             action="{{ route('store_table_usulan', ['name' => $currentUsulan->tahun]) }}">
                                             @csrf
@@ -150,7 +150,6 @@
                                         </form>
                                     @endif
                                 @endif
-
                             </div>
                         </div>
                     </div>
@@ -169,16 +168,15 @@
                                     </div>
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-left w-[30%]">
-                                    <div class="flex items-center gap-x-2">
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <div class="group inline-flex items-center gap-x-2" href="#">
                                         <span
                                             class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                            KOMPONEN PROGRAM/ KEGIATAN/ AKUN DETAIL
+                                            PROGRAM/ KEGIATAN/ KRO/ RO/ KOMPONEN/ SUBKOMP/ DETIL
                                         </span>
                                     </div>
                                 </th>
-
-                                <th scope="col" class="py-3 w-[15%]">
+                                <th scope="col" class="ppx-6 py-3 text-start" style="width: 20%">
                                     <div class="flex items-center justify-center ">
                                         <span
                                             class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
@@ -187,15 +185,15 @@
                                     </div>
                                 </th>
 
-                                <th scope="col" class="py-3 w-[15%]">
-                                    <div class="flex items-center justify-center ">
+                                <th scope="col" class="px-6 py-3 text-start" style="width: 40%">
+                                    <div class="group inline-flex items-center gap-x-2" href="#">
                                         <span
                                             class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
                                             SATUAN
                                         </span>
                                     </div>
                                 </th>
-                                <th scope="col" class="py-3 w-[25%]">
+                                <th scope="col" class="px-6 py-3 text-start" style="width: 30%">
                                     <div class="flex items-center justify-center ">
                                         <span
                                             class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
@@ -203,7 +201,7 @@
                                         </span>
                                     </div>
                                 </th>
-                                <th scope="col" class="py-3">
+                                <th scope="col" class="px-6 py-3 text-start" style="width: 20%">
                                     <div class="flex items-center justify-center ">
                                         <span
                                             class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
@@ -227,115 +225,214 @@
                                 @if ($currentUsulan->usulan_komponen_program)
                                     @foreach ($currentUsulan->usulan_komponen_program as $index => $item)
                                         <tr>
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <div class="px-6 py-2">
-                                                    <div class="flex items-center gap-x-2">
-                                                        <div class="grow">
+                                            <form method="POST"
+                                                action="{{ route('update_kegiatan', ['id' => $item->id]) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <td class="h-px w-px whitespace-nowrap">
+                                                    <div class="px-6 py-2">
+                                                        <div class="flex items-center gap-x-2">
+                                                            <div class="grow">
+                                                                {{-- <form method="POST"
+                                                                action="{{ route('store_usulan_unit') }}"> --}}
+                                                                <span class="text-sm text-gray-600 dark:text-gray-400">
+                                                                    {{-- <select id="hs-hidden-select"
+                                                                        class="py-3 px-4 pr-9 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
+                                                                        <option disabled selected>-- Pilih --</option>
+                                                                        @foreach ($komponen_program as $komponen_programs)
+                                                                            <option
+                                                                                {{ $komponen_programs->id == $item->komponen_program_id ? 'selected' : '' }}
+                                                                                value="{{ $komponen_programs->id }}">
+                                                                                {{ $komponen_programs->kode }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select> --}}
+                                                                    <div class="hs-dropdown relative inline-flex">
+                                                                        <button id="hs-dropdown-with-title" type="button"
+                                                                            class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                                                            {{ $item->komponen_program->kode ?? '' }}
+                                                                            <svg class="hs-dropdown-open:rotate-180 w-4 h-4"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                stroke="currentColor" stroke-width="2"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round">
+                                                                                <path d="m6 9 6 6 6-6" />
+                                                                            </svg>
+                                                                        </button>
+
+                                                                        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2 divide-y divide-gray-200 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700"
+                                                                            aria-labelledby="hs-dropdown-with-title">
+                                                                            <div class="py-2 first:pt-0 last:pb-0">
+                                                                                @foreach ($komponen_program as $komponen_programs)
+                                                                                    <form method="POST"
+                                                                                        action="{{ route('update_kegiatan', ['id' => $item->id]) }}">
+                                                                                        @csrf
+                                                                                        @method('PUT')
+                                                                                        <button
+                                                                                            class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700"
+                                                                                            {{ $komponen_programs->id == $item->komponen_program_id ? 'Actions' : '' }}
+                                                                                            type="submit"
+                                                                                            name="komponen_program_id"
+                                                                                            value="{{ $komponen_programs->id }}">
+                                                                                            {{ $komponen_programs->kode }}
+                                                                                            --
+                                                                                            {{ $komponen_programs->uraian }}
+                                                                                        </button>
+                                                                                    </form>
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </span>
+                                                                {{-- </form> --}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="h-px w-72 min-w-[18rem]">
+                                                    <div class="block relative z-10" href="#">
+                                                        <div class="px-6 py-2">
                                                             <span class="text-sm text-gray-600 dark:text-gray-400">
-                                                                <label for="hs-hidden-select"
-                                                                    class="sr-only">Label</label>
-                                                                <select id="hs-hidden-select"
-                                                                    class="py-3 px-4 pr-9 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
-                                                                    <option selected>-- Pilih --</option>
-                                                                    <option>1</option>
-                                                                    <option>2</option>
-                                                                    <option>3</option>
-                                                                </select>
+                                                                {{-- komponen_program --}}
+                                                                {{-- {{ $item->komponen_program }} --}}
+                                                                @if ($item->komponen_program)
+                                                                    {{ $item->komponen_program->uraian }}
+                                                                @else
+                                                                    -
+                                                                @endif
+
+
+                                                                {{-- Program
+                                                                Pendidikan
+                                                                dan
+                                                                Pelatihan Vokasi --}}
+
                                                             </span>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <div class="px-6 py-2">
-                                                    <span class="text-sm text-gray-600 dark:text-gray-400">Program
-                                                        Pendidikan
-                                                        dan
-                                                        Pelatihan Vokasi</span>
-                                                </div>
-                                            </td>
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <div class="px-6 py-2 flex justify-center">
-                                                    <span class="text-sm text-gray-600 dark:text-gray-400">
-                                                        <input type="text"
-                                                            class="py-2 px-3 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                                                            placeholder="Vol">
-                                                    </span>
-                                                </div>
-                                            </td>
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <div class="px-6 py-2 flex justify-center">
-                                                    <span class="text-sm text-gray-600 dark:text-gray-400">
-                                                        <label for="hs-hidden-select" class="sr-only">Label</label>
-                                                        <select id="hs-hidden-select"
-                                                            class="py-3 px-4 pr-9 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
-                                                            <option selected>-- Pilih --</option>
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                        </select>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <div class="px-6 py-2 flex justify-center">
-                                                    <span class="text-sm text-gray-600 dark:text-gray-400">
-                                                        <input type="text"
-                                                            class="py-2 px-3 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                                                            placeholder="Vol">
-                                                    </span>
-                                                </div>
-                                            </td>
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <div class="px-6 py-2 flex justify-center">
-                                                    <span
-                                                        class="text-sm text-gray-600 dark:text-gray-400">Rp.1234.978.000</span>
-                                                </div>
-                                            </td>
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <div class=" py-2 flex justify-end">
-                                                    <form method="POST" id="adi"
-                                                        action="{{ route('store_table_kegiatan', ['name' => $currentUsulan->tahun]) }}">
-                                                        @csrf
+                                                </td>
+
+                                                <form method="POST"
+                                                    action="{{ route('update_kegiatan', ['id' => $item->id]) }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <td class="h-px w-px whitespace-nowrap">
+                                                        <div class="px-6 py-2 flex justify-center">
+                                                            <span class="text-sm text-gray-600 dark:text-gray-400">
+                                                                <input type="text" name="volume"
+                                                                    value="{{ $item->volume }}"
+                                                                    class="py-2 px-3 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                                                                    placeholder="Vol">
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                </form>
+                                                <td>
+                                                    <div class="hs-dropdown relative inline-flex">
+                                                        <button id="hs-dropdown-with-title" type="button"
+                                                            class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                                            {{ $item->satuan->satuan ?? '' }}
+                                                            <svg class="hs-dropdown-open:rotate-180 w-4 h-4"
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="m6 9 6 6 6-6" />
+                                                            </svg>
+                                                        </button>
+
+                                                        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2 divide-y divide-gray-200 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700"
+                                                            aria-labelledby="hs-dropdown-with-title">
+                                                            <div class="py-2 first:pt-0 last:pb-0">
+                                                                @foreach ($satuan as $satuans)
+                                                                    <form method="POST"
+                                                                        action="{{ route('update_kegiatan', ['id' => $item->id]) }}">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <button
+                                                                            class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700"
+                                                                            {{ $satuans->id == $item->satuan_id ? 'Actions' : '' }}
+                                                                            type="submit" name="satuan_id"
+                                                                            value="{{ $satuans->id }}">
+                                                                            {{ $satuans->satuan }}
+                                                                        </button>
+                                                                    </form>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <form method="POST"
+                                                    action="{{ route('update_kegiatan', ['id' => $item->id]) }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <td class="h-px w-px whitespace-nowrap">
+                                                        <div class="px-6 py-2 flex justify-center">
+                                                            <span class="text-sm text-gray-600 dark:text-gray-400">
+                                                                <input type="text" name="harga_satuan"
+                                                                    value="{{ $item->harga_satuan }}"
+                                                                    class="py-2 px-3 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                                                                    placeholder="Vol">
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                </form>
+                                                <td class="h-px w-px whitespace-nowrap">
+                                                    <div class="px-6 py-2 flex justify-center">
+                                                        <span
+                                                            class="text-sm text-gray-600 dark:text-gray-400">Rp.{{ $item->volume * $item->harga_satuan }}</span>
+                                                    </div>
+                                                </td>
+
+                                                <td class="h-px w-px whitespace-nowrap">
+                                                    <div class=" py-2 flex justify-end">
                                                         <div>
                                                             @if ($index + 1 == count($currentUsulan->usulan_komponen_program))
-                                                                @foreach ($kategori as $index => $item)
+                                                                @foreach ($kategori as $index => $perulangan)
                                                                     @if ($index == count($currentUsulan->usulan_komponen_program))
-                                                                        <button type="submit"
-                                                                            class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                width="16" height="16"
-                                                                                viewBox="0 0 16 16" fill="none"
-                                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                                <path
-                                                                                    d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2"
-                                                                                    stroke="currentColor" stroke-width="2"
-                                                                                    stroke-linecap="round" />
-                                                                            </svg>
-                                                                            {{ $item->kategori }}
-                                                                        </button>
+                                                                        <form method="POST"
+                                                                            action="{{ route('store_table_kegiatan', ['name' => $currentUsulan->tahun]) }}">
+                                                                            @csrf
+                                                                            <button type="submit"
+                                                                                class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="16" height="16"
+                                                                                    viewBox="0 0 16 16" fill="none"
+                                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                                    <path
+                                                                                        d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2"
+                                                                                        stroke="currentColor"
+                                                                                        stroke-width="2"
+                                                                                        stroke-linecap="round" />
+                                                                                </svg>
+                                                                                {{ $perulangan->kategori }}
+                                                                            </button>
+                                                                        </form>
                                                                     @endif
                                                                 @endforeach
                                                             @endif
                                                         </div>
-                                                    </form>
-                                                    <form method="POST" action="#">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            class="py-2 px-3 mx-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-red-600 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-red-500 dark:focus:ring-offset-gray-800"
-                                                            href="#">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                                                <path fill-rule="evenodd"
-                                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                                            </svg>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </td>
+                                                        <form method="POST"
+                                                            action="{{ route('destroy_table_usulan', ['id' => $item->id]) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="py-2 px-3 mx-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-red-600 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-red-500 dark:focus:ring-offset-gray-800">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                                                </svg>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </form>
                                         </tr>
                                     @endforeach
                                 @endif

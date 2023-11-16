@@ -14,7 +14,7 @@ class SatuanSeeder extends Seeder
     public function run(): void
     {
         Satuan::create([
-            'satuan' => 'pembelian licensi',
+            'satuan' => 'lembaga',
         ]);
     }
 }

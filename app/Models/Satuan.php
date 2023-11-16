@@ -11,4 +11,12 @@ class Satuan extends Model
     protected $fillable = [
         'satuan',
     ];
+
+    public function usulan_komponen_program(){
+        return $this->hasMany(UsulanKomponenProgram::class);
+    }
+
+    public function komponen_program(){
+        return $this->hasMany(KomponenProgram::class);
+    }
 }
