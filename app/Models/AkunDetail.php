@@ -12,10 +12,16 @@ class AkunDetail extends Model
         'kode',
         'uraian',
         'usulan_komponen_program_id',
+        'kegiatan_id',
     ];
 
     public function UsulanKomponenProgram()
     {
         return $this->hasMany(UsulanKomponenProgram::class);
+    }
+
+    public function kegiatan()
+    {
+        return $this->hasMany(Kegiatan::class);
     }
 }

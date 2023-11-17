@@ -99,19 +99,19 @@ class UnitController extends Controller
         }
     }
 
-    // public function store_table_judul_kegiatan($name) {
-    //     $unit = Auth::user()->unit;
-    //     $usulan = Usulan::where('tahun', $name)
-    //     ->where('unit_id', $unit->id)->first();
+    public function store_table_judul_kegiatan($name) {
+        $unit = Auth::user()->unit;
+        $usulan = Usulan::where('tahun', $name)
+        ->where('unit_id', $unit->id)->first();
 
-    //     $usulangeprek = UsulanKomponenProgram::create([
-    //         'usulan_id' => $usulan->id
-    //     ]);
+        $usulangeprek = UsulanKomponenProgram::create([
+            'usulan_id' => $usulan->id
+        ]);
 
-    //     if($usulangeprek){
-    //         return redirect()->route('table_judul_kegiatan',['tahun' => $name])->withErrors('success','Data berhasil ditambahkan');
-    //     }
-    // }
+        if($usulangeprek){
+            return redirect()->route('table_judul_kegiatan',['tahun' => $name])->withErrors('success','Data berhasil ditambahkan');
+        }
+    }
 
     // public function store_usulan_unit($id){
     //     $unit = Auth::user()->unit;
@@ -138,44 +138,13 @@ class UnitController extends Controller
     }
 
     public function table_judul_kegiatan(Request $request){
-        $tahun = $request->tahun;
-        $unit = Auth::user()->unit;
-
-        $tahunenow = Date::now()->format('Y');
-
         $satuan = Satuan::all();
         $akun_detail = AkunDetail::all();
 
-        $usulan = Usulan::with('usulan_komponen_program')->where('unit_id', $unit->id)->get();
-
-        if(!$tahun){
-            $currentUsulan = Usulan::with('usulan_komponen_program.komponen_program.satuan.akun_detail')
-        ->where('tahun', $tahunenow)
-        ->where('unit_id', $unit->id)->first();
-        }else{
-            $currentUsulan = Usulan::with('usulan_komponen_program.komponen_program.satuan.akun_detail')
-        ->where('tahun', $tahun)
-        ->where('unit_id', $unit->id)->first();
-        }
-
-        // dd($currentUsulan);
-
-        $kategori = Kategori::all();
-
-        $komponen_program = KomponenProgram::with('kategori','parent')->get();
-        $usulan_komponent_program = UsulanKomponenProgram::with('usulan','komponen_program')->get();
-        // dd($currentUsulan);
         return view('unit.table_judul_kegiatan.table_judul_kegiatan',[
-            'usulan_komponent_program' => $usulan_komponent_program,
-            'usulan' => $usulan,
-            'komponen_program' => $komponen_program,
-            'unit' => $unit,
-            'currentUsulan' => $currentUsulan,
-            'kategori' => $kategori,
             'satuan' => $satuan,
             'akun_detail' => $akun_detail,
         ]);
-        // return view('unit.table_judul_kegiatan.table_judul_kegiatan');
     }
 
     public function update_usulan(Request $request, $id) {

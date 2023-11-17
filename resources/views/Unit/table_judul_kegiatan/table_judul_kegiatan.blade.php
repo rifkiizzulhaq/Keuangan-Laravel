@@ -66,10 +66,10 @@
                             </div>
 
                             <div class="flex justify-end w-full mt-5 px-4">
-                                @if ($currentUsulan)
-                                    @if (count($currentUsulan->usulan_komponen_program) < 1)
+                                {{-- @if ($currentUsulan)
+                                    @if (count($currentUsulan->usulan_komponen_program) < 1) --}}
                                         <form id="tambah_program" method="POST"
-                                            action="{{ route('store_table_judul_kegiatan', ['name' => $currentUsulan->tahun]) }}">
+                                            action="{{ route('store_table_judul_kegiatan') }}">
                                             @csrf
                                             <button type="submit"
                                                 class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
@@ -82,8 +82,8 @@
                                                 Tambah
                                             </button>
                                         </form>
-                                    @endif
-                                @endif
+                                    {{-- @endif
+                                @endif --}}
                             </div>
                         </div>
                     </div>
@@ -207,7 +207,7 @@
                         </thead>
 
                         <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                            @foreach ($currentUsulan->usulan_komponen_program as $index => $item)
+                            @foreach ($satuan as $item )
                                 <tr class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800">
                                     <form method="POST"
                                         action="{{ route('update_judul_kegiatan', ['id' => $item->id]) }}">
@@ -348,7 +348,7 @@
                                                 {{-- @if ($currentUsulan) --}}
                                                 {{-- @if (count($currentUsulan->usulan_komponen_program) < 1) --}}
                                                 <form id="tambah_program" method="POST"
-                                                    action="{{ route('store_table_judul_kegiatan', ['name' => $currentUsulan->tahun]) }}">
+                                                    action="{{ route('store_table_judul_kegiatan') }}">
                                                     @csrf
                                                     <button type="submit"
                                                         class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">

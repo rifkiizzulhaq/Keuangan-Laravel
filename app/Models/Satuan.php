@@ -9,6 +9,7 @@ class Satuan extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'kegiatan_id',
         'satuan',
     ];
 
@@ -18,5 +19,9 @@ class Satuan extends Model
 
     public function komponen_program(){
         return $this->hasMany(KomponenProgram::class);
+    }
+
+    public function kegiatan(){
+        return $this->hasMany(Kegiatan::class);
     }
 }

@@ -100,7 +100,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 
         Route::get('/table-judul-kegiatan',[UnitController::class, 'table_judul_kegiatan'])->name('table_judul_kegiatan');
-        Route::post('/store-judul-kegiatan/{name}',[UnitController::class, 'store_table_judul_kegiatan'])->name('store_table_judul_kegiatan');
+        Route::post('/store-judul-kegiatan',[UnitController::class, 'store_table_judul_kegiatan'])->name('store_table_judul_kegiatan');
         Route::put('/update-judul-kegiatan/{id}', [UnitController::class, 'update_judul_kegiatan'])->name('update_judul_kegiatan');
         Route::delete('/destroy-table-judul-kegiatan/{id}',[UnitController::class, 'destroy_table_judul_kegiatan'])->name('destroy_table_judul_kegiatan');
     });
