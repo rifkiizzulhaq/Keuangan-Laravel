@@ -11,8 +11,8 @@ class UsulanKomponenProgram extends Model
     protected $fillable = [
         'usulan_id',
         'komponen_program_id',
-        'satuan_id',
-        'akun_detail_id',
+        // 'satuan_id',
+        // 'akun_detail_id',
         'volume',
         'harga_satuan',
     ];

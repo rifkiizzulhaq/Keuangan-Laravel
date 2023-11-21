@@ -84,6 +84,21 @@ class UnitController extends Controller
         }
     }
 
+    public function store_table_tambah_kegiatan($name){
+        $unit = Auth::user()->unit;
+        $usulan = Usulan::where('tahun', $name)
+            ->where('unit_id', $unit->id)
+            ->first();
+
+        $usulangeprek = UsulanKomponenProgram::create([
+            'usulan_id' => $usulan->id
+        ]);
+
+        if($usulangeprek){
+            return redirect()->route('store_table_tambah_kegiatan', ['tahun' => $name])->withErrors('success','Data berhasil ditambahkan');
+        }
+    }
+
 
     public function store_table_kegiatan($name) {
         $unit = Auth::user()->unit;
@@ -138,12 +153,10 @@ class UnitController extends Controller
     }
 
     public function table_judul_kegiatan(Request $request){
-        $satuan = Satuan::all();
-        $akun_detail = AkunDetail::all();
+        $usulan_komponent_program = UsulanKomponenProgram::with('usulan','komponen_program')->get();
 
         return view('unit.table_judul_kegiatan.table_judul_kegiatan',[
-            'satuan' => $satuan,
-            'akun_detail' => $akun_detail,
+            'usulan_komponent_program' => $usulan_komponent_program,
         ]);
     }
 

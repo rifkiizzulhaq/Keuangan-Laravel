@@ -13,9 +13,9 @@ class Satuan extends Model
         'satuan',
     ];
 
-    public function usulan_komponen_program(){
-        return $this->hasMany(UsulanKomponenProgram::class);
-    }
+    // public function usulan_komponen_program(){
+    //     return $this->hasMany(UsulanKomponenProgram::class);
+    // }
 
     public function komponen_program(){
         return $this->hasMany(KomponenProgram::class);

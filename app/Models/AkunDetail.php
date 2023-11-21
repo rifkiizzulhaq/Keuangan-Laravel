@@ -15,10 +15,10 @@ class AkunDetail extends Model
         'kegiatan_id',
     ];
 
-    public function UsulanKomponenProgram()
-    {
-        return $this->hasMany(UsulanKomponenProgram::class);
-    }
+    // public function UsulanKomponenProgram()
+    // {
+    //     return $this->hasMany(UsulanKomponenProgram::class);
+    // }
 
     public function kegiatan()
     {

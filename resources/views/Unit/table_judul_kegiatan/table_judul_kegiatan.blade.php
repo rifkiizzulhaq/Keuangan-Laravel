@@ -66,10 +66,8 @@
                             </div>
 
                             <div class="flex justify-end w-full mt-5 px-4">
-                                {{-- @if ($currentUsulan)
-                                    @if (count($currentUsulan->usulan_komponen_program) < 1) --}}
                                         <form id="tambah_program" method="POST"
-                                            action="{{ route('store_table_judul_kegiatan') }}">
+                                            action="{{ route('store_table_tambah_kegiatan',['tahun']) }}">
                                             @csrf
                                             <button type="submit"
                                                 class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
@@ -82,8 +80,6 @@
                                                 Tambah
                                             </button>
                                         </form>
-                                    {{-- @endif
-                                @endif --}}
                             </div>
                         </div>
                     </div>
@@ -207,7 +203,7 @@
                         </thead>
 
                         <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                            @foreach ($satuan as $item )
+                            @foreach ($usulan_komponent_program as $item )
                                 <tr class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800">
                                     <form method="POST"
                                         action="{{ route('update_judul_kegiatan', ['id' => $item->id]) }}">
@@ -219,7 +215,7 @@
                                                     <div class="hs-dropdown relative inline-flex">
                                                         <button id="hs-dropdown-with-title" type="button"
                                                             class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                                            {{ $item->akun_detail->kode ?? '' }}
+                                                            {{-- {{ $item->akun_detail->kode ?? '' }} --}}
                                                             <svg class="hs-dropdown-open:rotate-180 w-4 h-4"
                                                                 xmlns="http://www.w3.org/2000/svg" width="24"
                                                                 height="24" viewBox="0 0 24 24" fill="none"
@@ -232,22 +228,23 @@
                                                         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2 divide-y divide-gray-200 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700"
                                                             aria-labelledby="hs-dropdown-with-title">
                                                             <div class="py-2 first:pt-0 last:pb-0">
-                                                                @foreach ($akun_detail as $akun_details)
+                                                                {{-- @foreach ($akun_detail as $akun_details) --}}
                                                                     <form method="POST"
                                                                         action="{{ route('update_judul_kegiatan', ['id' => $item->id]) }}">
                                                                         @csrf
                                                                         @method('PUT')
                                                                         <button
                                                                             class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700"
-                                                                            {{ $akun_details->id == $item->akun_detail_id ? 'Actions' : '' }}
+                                                                            {{-- {{ $akun_details->id == $item->akun_detail_id ? 'Actions' : '' }} --}}
                                                                             type="submit" name="akun_detail_id"
-                                                                            value="{{ $akun_details->id }}">
-                                                                            {{ $akun_details->kode }}
-                                                                            --
-                                                                            {{ $akun_details->uraian }}
+                                                                            {{-- value="{{ $akun_details->id }}" --}}
+                                                                            >
+                                                                            {{-- {{ $akun_details->kode }} --}}
+                                                                            {{-- -- --}}
+                                                                            {{-- {{ $akun_details->uraian }} --}}
                                                                         </button>
                                                                     </form>
-                                                                @endforeach
+                                                                {{-- @endforeach --}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -300,20 +297,21 @@
                                             <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2 divide-y divide-gray-200 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700"
                                                 aria-labelledby="hs-dropdown-with-title">
                                                 <div class="py-2 first:pt-0 last:pb-0">
-                                                    @foreach ($satuan as $satuans)
+                                                    {{-- @foreach ($satuan as $satuans) --}}
                                                         <form method="POST"
                                                             action="{{ route('update_judul_kegiatan', ['id' => $item->id]) }}">
                                                             @csrf
                                                             @method('PUT')
                                                             <button
                                                                 class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700"
-                                                                {{ $satuans->id == $item->satuan_id ? 'Actions' : '' }}
+                                                                {{-- {{ $satuans->id == $item->satuan_id ? 'Actions' : '' }} --}}
                                                                 type="submit" name="satuan_id"
-                                                                value="{{ $satuans->id }}">
-                                                                {{ $satuans->satuan }}
+                                                                {{-- value="{{ $satuans->id }}" --}}
+                                                                >
+                                                                {{-- {{ $satuans->satuan }} --}}
                                                             </button>
                                                         </form>
-                                                    @endforeach
+                                                    {{-- @endforeach --}}
                                                 </div>
                                             </div>
                                         </div>
