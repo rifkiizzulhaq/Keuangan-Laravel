@@ -7,6 +7,8 @@ use App\Models\AkunDetail;
 use App\Models\Kategori;
 use App\Models\KomponenProgram;
 use App\Models\Satuan;
+use App\Models\Usulan;
+use App\Models\UsulanKomponenProgram;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -226,5 +228,28 @@ class AdminController extends Controller
         $akun_detail->delete();
         // dd($id);
         return redirect()->route('table_akun_detail')->with('success','Data berhasil dihapus');
+    }
+
+    public function usulan_dari_unit(){
+        $data['usulan'] = Usulan::with('unit')->get();
+        return view('Admin.usulan_dari_unit.usulan_dari_unit', $data);
+    }
+
+    public function show_usulan($id){
+        $usulan = Usulan::with('usulan_komponen_program')->find($id);
+        $currentUsulan = $usulan;
+
+        $kategori = Kategori::all();
+
+        $komponen_program = KomponenProgram::with('kategori','parent')->get();
+        $usulan_komponent_program = UsulanKomponenProgram::with('usulan','komponen_program')->get();
+
+        return view('Admin.usulan_dari_unit.show_usulan', [
+            'usulan_komponent_program' => $usulan_komponent_program,
+            'usulan' => $usulan,
+            'komponen_program' => $komponen_program,
+            'currentUsulan' => $currentUsulan,
+            'kategori' => $kategori,
+        ]);
     }
 }

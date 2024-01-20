@@ -15,9 +15,9 @@
         <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <div class="p-4 sm:p-7">
                 <div class="text-center">
-                    <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h1>
+                    <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Masuk</h1>
                 </div>
-                <div class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">Or</div>
+
                 <div class="mt-5">
                     <!-- Validation Errors -->
                     @if ($errors->has('email'))
@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="ml-4">
                                         <h3 class="text-sm text-red-800 font-semibold">
-                                            Uername And Password Invalid
+                                            Email dan Password tidak cocok
                                         </h3>
                                     </div>
                                 </div>
@@ -47,9 +47,9 @@
                         <div class="grid gap-y-4">
                             <!-- Form Group -->
                             <div>
-                                <label for="email" class="block text-sm mb-2 dark:text-white">Email address</label>
+                                <label for="email" class="block text-sm mb-2 dark:text-white">Alamat Email</label>
                                 <div class="relative">
-                                    <input type="email" id="email" name="email" placeholder="email"
+                                    <input type="email" id="email" name="email" placeholder="Masukan Email"
                                         class="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                         required aria-describedby="email-error">
                                     <div
@@ -68,13 +68,14 @@
 
                             <!-- Form Group -->
                             <div>
-                                <div class="flex justify-between items-center">
+                                {{-- <div class="flex justify-between items-center">
                                     <label for="password" class="block text-sm mb-2 dark:text-white">Password</label>
                                     <a class="text-sm text-blue-600 decoration-2 hover:underline font-medium"
                                         href="{{ route('password.request') }}">Forgot password?</a>
-                                </div>
+                                </div> --}}
+                                <label for="email" class="block text-sm mb-2 dark:text-white">Password</label>
                                 <div class="relative">
-                                    <input type="password" id="password" name="password" placeholder="password"
+                                    <input type="password" id="password" name="password" placeholder="Masukan Password"
                                         class="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
                                         required aria-describedby="password-error">
                                     <div
@@ -92,7 +93,7 @@
                             <!-- End Form Group -->
 
                             <!-- Checkbox -->
-                            <div class="flex items-center justify-between">
+                            {{-- <div class="flex items-center justify-between">
                                 <div class="flex">
                                     <div class="flex">
                                         <input id="remember-me" name="remember-me" type="checkbox"
@@ -109,7 +110,7 @@
                                             class="text-sm text-blue-600 decoration-2 hover:underline font-medium">Register</a>
                                     @endif
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- End Checkbox -->
                             <div>
 

@@ -14,15 +14,12 @@ return new class extends Migration
         Schema::create('kegiatans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('usulan_komponen_program_id');
-            $table->string('volume');
-            $table->string('satuan');
-
+            $table->unsignedBigInteger('akun_detail_id')->nullable();
+            $table->string('judul_kegiatan');
             $table->timestamps();
 
             $table->foreign('usulan_komponen_program_id')->references('id')->on('usulan_komponen_programs')->onDelete('cascade');
-
-            // $table->foreign('satuan_id')->references('id')->on('satuans')->onDelete('cascade');
-            // $table->foreign('akun_detail_id')->references('id')->on('akun_details')->onDelete('cascade');
+            $table->foreign('akun_detail_id')->references('id')->on('akun_details')->onDelete('cascade');
         });
     }
 

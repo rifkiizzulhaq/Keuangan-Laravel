@@ -13,7 +13,7 @@
                             <div class="hs-dropdown relative inline-flex">
                                 <button id="hs-dropdown-default" type="button"
                                     class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                    {{ $currentUsulan->tahun }}
+                                    {{ $currentUsulan->tahun ?? '' }}
                                     <svg class="hs-dropdown-open:rotate-180 w-4 h-4" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -38,18 +38,7 @@
                         <div>
                             <div class="inline-flex gap-x-2">
                                 <div class="hs-dropdown relative inline-block [--placement:bottom-right]">
-                                    <button id="hs-as-table-table-export-dropdown" type="button"
-                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                        <svg class="flex-shrink-0 w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                            <polyline points="7 10 12 15 17 10" />
-                                            <line x1="12" x2="12" y1="15" y2="3" />
-                                        </svg>
-                                        Export
-                                    </button>
+
                                     <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mt-2 divide-y divide-gray-200 min-w-[12rem] z-20 bg-white shadow-md rounded-lg p-2 mt-2 dark:divide-gray-700 dark:bg-gray-800 dark:border dark:border-gray-700"
                                         aria-labelledby="hs-as-table-table-export-dropdown">
                                         <div class="py-2 first:pt-0 last:pb-0">
@@ -71,7 +60,7 @@
                                     <button type="button"
                                         class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                                         data-hs-overlay="#hs-cookies">
-                                        Open modal
+                                        Tahun Anggaran
                                     </button>
                                 </div>
 
@@ -109,22 +98,22 @@
                                                         @endif
                                                         <input name="tahun" id="hs-floating-input-email"
                                                             class="peer p-4 block w-full border border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600
-                            focus:pt-8
-                            focus:pb-2
-                            [&:not(:placeholder-shown)]:pt-8
-                            [&:not(:placeholder-shown)]:pb-2
-                            autofill:pt-8
-                            autofill:pb-2"
+                                                            focus:pt-8
+                                                            focus:pb-2
+                                                            [&:not(:placeholder-shown)]:pt-8
+                                                            [&:not(:placeholder-shown)]:pb-2
+                                                            autofill:pt-8
+                                                            autofill:pb-2"
                                                             placeholder="tahun anggaran">
                                                         <label for="hs-floating-input-email"
                                                             class="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                              peer-focus:text-xs
-                              peer-focus:-translate-y-1.5
-                              peer-focus:text-gray-500
-                              peer-[:not(:placeholder-shown)]:text-xs
-                              peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                              peer-[:not(:placeholder-shown)]:text-gray-500">Tahun
-                                                            Anggaran</label>
+                                                            peer-focus:text-xs
+                                                            peer-focus:-translate-y-1.5
+                                                            peer-focus:text-gray-500
+                                                            peer-[:not(:placeholder-shown)]:text-xs
+                                                            peer-[:not(:placeholder-shown)]:-translate-y-1.5
+                                                            peer-[:not(:placeholder-shown)]:text-gray-500">Masukan
+                                                            tahun angaran</label>
                                                     </div>
                                                     <!-- End Floating Input -->
                                                 </div>
@@ -281,7 +270,8 @@
                                                     <a class="block relative z-10" href="#">
                                                         <div class="px-6 py-2">
                                                             @if ($item->komponen_program)
-                                                                <p class="text-sm">{{ $item->komponen_program->uraian }}
+                                                                <p class="text-sm dark:text-white">
+                                                                    {{ $item->komponen_program->uraian }}
                                                                 </p>
                                                             @else
                                                                 -
@@ -382,22 +372,22 @@
                                                                         <input name="harga_satuan"
                                                                             id="hs-floating-input-email"
                                                                             class="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600
-                                    focus:pt-8
-                                    focus:pb-2
-                                    [&:not(:placeholder-shown)]:pt-8
-                                    [&:not(:placeholder-shown)]:pb-2
-                                    autofill:pt-8
-                                    autofill:pb-2"
+                                                                            focus:pt-8
+                                                                            focus:pb-2
+                                                                            [&:not(:placeholder-shown)]:pt-8
+                                                                            [&:not(:placeholder-shown)]:pb-2
+                                                                            autofill:pt-8
+                                                                            autofill:pb-2"
                                                                             placeholder="you@email.com"
                                                                             value="{{ $item->harga_satuan }}">
                                                                         <label for="hs-floating-input-email"
                                                                             class="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                                      peer-focus:text-xs
-                                      peer-focus:-translate-y-1.5
-                                      peer-focus:text-gray-500
-                                      peer-[:not(:placeholder-shown)]:text-xs
-                                      peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                                      peer-[:not(:placeholder-shown)]:text-gray-500">harga_satuan</label>
+                                                                            peer-focus:text-xs
+                                                                            peer-focus:-translate-y-1.5
+                                                                            peer-focus:text-gray-500
+                                                                            peer-[:not(:placeholder-shown)]:text-xs
+                                                                            peer-[:not(:placeholder-shown)]:-translate-y-1.5
+                                                                            peer-[:not(:placeholder-shown)]:text-gray-500">harga_satuan</label>
                                                                     </div>
                                                                     <!-- End Floating Input -->
                                                             </span>
@@ -408,7 +398,8 @@
                                                     <div class="flex justify-center px-6 py-2">
                                                         <div
                                                             class="hs-dropdown relative inline-block [--placement:bottom-right]">
-                                                            <h3>Rp. {{ $item->volume * $item->harga_satuan }}</h3>
+                                                            <h3 class="dark:text-white">Rp.
+                                                                {{ $item->volume * $item->harga_satuan }}</h3>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -437,14 +428,12 @@
                                                                                 stroke="currentColor" stroke-width="2"
                                                                                 stroke-linecap="round" />
                                                                         </svg>
-
                                                                         {{ $kategori->where('id', $item->komponen_program_id + 1)->first()->kategori }}
-
                                                                     </button>
                                                                 @endif
                                                                 @if ($kategori->where('id', $item->komponen_program_id + 1)->first()->id == 6)
                                                                     <a class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-                                                                        href="{{ route('table_judul_kegiatan') }}">
+                                                                        href="{{ route('table_judul_kegiatan', ['id' => $item->id]) }}">
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                             width="16" height="16"
                                                                             viewBox="0 0 16 16" fill="none"

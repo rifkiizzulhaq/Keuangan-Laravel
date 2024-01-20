@@ -20,8 +20,13 @@ class AkunDetail extends Model
     //     return $this->hasMany(UsulanKomponenProgram::class);
     // }
 
-    public function kegiatan()
+    public function kegiatans()
     {
         return $this->hasMany(Kegiatan::class);
     }
+
+    // public function usulan_komponen_program_details()
+    // {
+    //     return $this->hasMany(UsulanKomponenProgramDetail::class);
+    // }
 }

@@ -55,6 +55,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
 
     Route::middleware(['CheckUserRole:Admin'])->group(function () {
+
+        Route::get('/usulan_dari_unit', [AdminController::class, 'usulan_dari_unit'])->name('usulan_dari_unit');
+        Route::get('/show_usulan/{id?}', [AdminController::class, 'show_usulan'])->name('show_usulan');
+
         Route::get('/table-program', [AdminController::class, 'table_program'])->name('table_program');
         Route::get('/program',[AdminController::class, 'program'])->name('program');
         Route::post('/store-program', [AdminController::class, 'store_program'])->name('store_program');
@@ -99,11 +103,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('/store-usulan-unit',[UnitController::class, 'store_usulan_unit'])->name('store_usulan_unit');
 
 
-        Route::get('/table-judul-kegiatan',[UnitController::class, 'table_judul_kegiatan'])->name('table_judul_kegiatan');
+        Route::get('/table-judul-kegiatan/{id}',[UnitController::class, 'table_judul_kegiatan'])->name('table_judul_kegiatan');
         Route::post('/store-tambah-kegiatan/{name}',[UnitController::class, 'store_table_tambah_kegiatan'])->name('store_table_tambah_kegiatan');
         Route::post('/store-judul-kegiatan',[UnitController::class, 'store_table_judul_kegiatan'])->name('store_table_judul_kegiatan');
         Route::put('/update-judul-kegiatan/{id}', [UnitController::class, 'update_judul_kegiatan'])->name('update_judul_kegiatan');
         Route::delete('/destroy-table-judul-kegiatan/{id}',[UnitController::class, 'destroy_table_judul_kegiatan'])->name('destroy_table_judul_kegiatan');
+
+        Route::post('/modal-kegiatan',[UnitController::class, 'modal'])->name('modal-kegiatan');
+        Route::post('/modal-rincian',[UnitController::class, 'rincian'])->name('modal-rincian');
     });
 });
 

@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Unit;
 use App\Http\Controllers\Controller;
 use App\Models\AkunDetail;
 use App\Models\Kategori;
+use App\Models\Kegiatan;
 use App\Models\KomponenProgram;
 use App\Models\Satuan;
 use App\Models\Unit;
 use App\Models\Usulan;
+use App\Models\UsulanDetailHasRincian;
 use App\Models\UsulanKomponenProgram;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,11 +30,11 @@ class UnitController extends Controller
         $usulan = Usulan::with('usulan_komponen_program')->where('unit_id', $unit->id)->get();
 
         if(!$tahun){
-            $currentUsulan = Usulan::with('usulan_komponen_program.komponen_program.satuan')
+            $currentUsulan = Usulan::with(['usulan_komponen_program.komponen_program.satuan','usulan_komponen_program.kegiatans'])
         ->where('tahun', $tahunenow)
         ->where('unit_id', $unit->id)->first();
         }else{
-            $currentUsulan = Usulan::with('usulan_komponen_program.komponen_program.satuan')
+            $currentUsulan = Usulan::with(['usulan_komponen_program.komponen_program.satuan','usulan_komponen_program.kegiatans'])
         ->where('tahun', $tahun)
         ->where('unit_id', $unit->id)->first();
         }
@@ -74,7 +76,6 @@ class UnitController extends Controller
         $usulan = Usulan::where('tahun', $name)
             ->where('unit_id', $unit->id)
             ->first();
-
         $usulangeprek = UsulanKomponenProgram::create([
             'usulan_id' => $usulan->id
         ]);
@@ -99,8 +100,7 @@ class UnitController extends Controller
         }
     }
 
-
-    public function store_table_kegiatan($name) {
+    public function store_table_kegiatan( $name) {
         $unit = Auth::user()->unit;
         $usulan = Usulan::where('tahun', $name)
         ->where('unit_id', $unit->id)->first();
@@ -153,11 +153,84 @@ class UnitController extends Controller
     }
 
     public function table_judul_kegiatan(Request $request){
-        $usulan_komponent_program = UsulanKomponenProgram::with('usulan','komponen_program')->get();
+        $tahun = $request->tahun;
 
+        if ($tahun) {
+            $usulan_komponent_program = UsulanKomponenProgram::with('usulan', 'komponen_program','kegiatans')
+                ->whereHas('usulan', function ($query) use ($tahun) {
+                    $query->where('tahun', $tahun);
+                })
+                ->first();
+        } else {
+            $usulan_komponent_program = UsulanKomponenProgram::with('usulan', 'komponen_program','kegiatans')->first();
+            // $tahun = Date::now()->format('Y');
+        }
+
+        $akun_detail = AkunDetail::with('kegiatans')->get();
+
+        // dd($usulan_komponent_program);
+
+        // $usulanTable = kegiatan::with('UsulanKomponenProgram')->where('usulan_komponen_program_id', $usulan_komponent_program->first()->id)->get();
+        // dd($usulan_komponent_program->first()->id);
         return view('unit.table_judul_kegiatan.table_judul_kegiatan',[
             'usulan_komponent_program' => $usulan_komponent_program,
+            // 'usulanTable' => $usulanTable,
+            // 'tahun' => $tahun,
+            // 'usulan_has_rincian' => $usulan_has_rincian,
+            'akun_detail' => $akun_detail,
         ]);
+    }
+
+    public function kegiatans(){
+        $kegiatans = Kegiatan::all();
+        $usulan_komponen_program = UsulanKomponenProgram::all();
+
+        return view('unit.table_judul_kegiatan.table_judul_kegiatan',[
+            'kegiatans' => $kegiatans,
+            'usulan_komponen_program' => $usulan_komponen_program,
+        ]);
+    }
+
+    public function modal(Request $request){
+        $request->validate([
+            'judul_kegiatan' => 'required',
+            // 'usulan_komponen_program_id' => 'required|exists:usulan_komponen_programs,id',
+        ] );
+
+        // dd($request->all());
+        // $usulan_komponen_program = UsulanKomponenProgram::where('usulan_komponen_program_id', $request->id)->first();
+
+        kegiatan::create([
+            'judul_kegiatan' => $request->judul_kegiatan,
+            'usulan_komponen_program_id' => $request->usulan_komponen_program_id,
+            // 'akun_detail_id' => $request->akun_detail_id,
+        ]);
+
+        return redirect()->route('table_judul_kegiatan',['id' => $request->usulan_komponen_program_id]);
+    }
+
+    public function rincian(Request $request){
+        // dd($request->all());
+        // $request->validate([
+        //     'detail' => 'required',
+        //     'volume' => 'required',
+        //     'satuan' => 'required',
+        //     'harga_satuan' => 'required',
+        //     'kegiatan_id' => 'required',
+        // ] );
+
+        // dd($request->all());
+        // $usulan_komponen_program = UsulanKomponenProgram::where('usulan_komponen_program_id', $request->id)->first();
+
+        UsulanDetailHasRincian::create([
+            'detail' => $request->detail,
+            'volume' => $request->volume,
+            'satuan' => $request->satuan,
+            'harga_satuan' => $request->harga_satuan,
+            'kegiatan_id' => $request->kegiatan_id,
+        ]);
+
+        return redirect()->route('table_judul_kegiatan');
     }
 
     public function update_usulan(Request $request, $id) {

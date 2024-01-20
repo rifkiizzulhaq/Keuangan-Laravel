@@ -11,20 +11,21 @@ class Kegiatan extends Model
     protected $fillable = [
         'usulan_komponen_program_id',
         'akun_detail_id',
-        'satuan_id',
-        'volume',
-        'satuan',
+        'judul_kegiatan'
     ];
 
-    // public function usulan_komponen_program(){
-    //     return $this->belongsTo(UsulanKomponenProgram::class);
-    // }
-
-    public function satuan(){
-        return $this->belongsTo(Satuan::class);
+    public function usulan_komponen_program()
+    {
+        return $this->belongsTo(UsulanKomponenProgram::class);
     }
 
-    public function akun_detail(){
-        return $this->belongsTo(AkunDetail::class);
+    public function usulan_detail_has_rincian()
+    {
+        return $this->hasMany(UsulanDetailHasRincian::class);
+    }
+
+    public function akun_detail()
+    {
+        return $this->belongsToMany(AkunDetail::class, 'usulan_detail_has_rincians');
     }
 }
